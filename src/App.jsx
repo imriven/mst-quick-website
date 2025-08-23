@@ -29,8 +29,9 @@ const Global = createGlobalStyle`
   body{
     margin:0; color:#fff;
     background:
-      radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.06), transparent 60%),
-      linear-gradient(180deg, var(--navy) 0%, var(--purple) 40%, #12081a 100%);
+      /* radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.06), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--purple) 40%, #12081a 100%); */
+      black;
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     overflow-x:hidden;
     scroll-behavior:smooth;
@@ -142,6 +143,8 @@ const Hero = styled.header`
   transform: translate3d(var(--mx,0px), var(--py,0px), 0) rotate(var(--tilt,0deg));
   will-change: transform;
   z-index: 2;
+
+  
 }
 
 
@@ -152,6 +155,7 @@ const Hero = styled.header`
     display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center;
 
     width: 100%;
+
     margin-inline: auto;
     padding-inline: var(--gutter, 24px);
   }
@@ -219,6 +223,9 @@ const Mission = styled(Section)`
 const Grid = styled.div`
   display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
   .card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
     padding:16px 14px; text-align:center; font-weight:800; letter-spacing:.02em;
     border:1px solid rgba(255,255,255,.18); border-radius:12px;
     background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -247,7 +254,7 @@ const Footer = styled.footer`
 // DATA
 const names = [
   "Tytan", "Erebus", "Ångel", "LPT", "DriftingLights", "JagWar", "Oath",
-  "Rockagoth", "GlitterPanda", "Juventic", "AzamiKimura", "JapaneseTeriyakiSauce", "TheCheddarBay"
+  "Rockagoth", "GlitterPanda", "Juventic", "AzamiKimura", "Japanese\nTeriyakiSauce", "TheCheddarBay"
 ];
 
 export default function App() {
@@ -359,13 +366,13 @@ export default function App() {
           <h2 className="title">Upcoming Events</h2>
           <div className="rule" />
           <HUD>
-            <div className="cell">Oct 4, 2025</div>
-            <div className="cell">Seattle Local Tekken Night</div>
-            <div className="cell cta"><a href="#">Details</a></div>
+            <div className="cell">Aug 24, 2025</div>
+            <div className="cell">Birthday Tower of Pain</div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
 
-            <div className="cell">Oct 18, 2025</div>
-            <div className="cell">PNW Community Meetup + Coaching</div>
-            <div className="cell cta"><a href="#">Details</a></div>
+            <div className="cell">Aug 28, 2025</div>
+            <div className="cell">Almost Pro Tekken Tournament</div>
+            <div className="cell cta"><a href="https://west.paxsite.com/en-us/features/pax-arena.html">Details</a></div>
 
             <div className="cell">—</div>
             <div className="cell">Awaiting Orders…</div>
