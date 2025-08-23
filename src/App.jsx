@@ -1,77 +1,98 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaDiscord } from "react-icons/fa";
+
+
 
 // ASSETS
-// Put these files in src/assets and keep names exactly, or update imports
 import mech from "./assets/mst-mech2.png";
-import logotype from "./assets/logotype.png";        // your graffiti wordmark
-import outlineNavy from "./assets/blue.png"; // your outline tile
-import revealMp4 from "./assets/logo-reveal.mp4";    // optional MP4
-import revealWebm from "./assets/logo-reveal.webm";  // optional WebM
+import logotype from "./assets/logotype.png";
+import outlineNavy from "./assets/blue.png";
+import revealMp4 from "./assets/logo-reveal.mp4";
+import revealWebm from "./assets/logo-reveal.webm";
 import CursorFollower from "./components/CursorFollower";
 
-// COLORS
+// GLOBALS
 const Global = createGlobalStyle`
   :root{
     --orange:#EB632D; --purple:#380636; --navy:#1B3458;
-     --page-max:1200px; --gutter:24px; 
+    --page-max:1320px;                 /* 🔑 site-wide column width */
+    --gutter:24px;
   }
   *{ box-sizing:border-box }
-  html,body,#root{ height:100% }
+  html,body,#root{ height:100%; width:100% }
   html { scroll-behavior: smooth; }
 
-/* make anchors stop *below* the fixed nav */
-[id] { scroll-margin-top: 72px; }   /* tweak to your nav height */
-@media (max-width: 600px){
-  [id] { scroll-margin-top: 64px; }
-}
+  /* anchor offset for fixed nav */
+  [id] { scroll-margin-top: 72px; }
+  @media (max-width: 600px){
+    [id] { scroll-margin-top: 64px; }
+  }
 
   body{
     margin:0; color:#fff;
-    background:
-      /* radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.06), transparent 60%),
-      linear-gradient(180deg, var(--navy) 0%, var(--purple) 40%, #12081a 100%); */
-      black;
+    background: black;
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     overflow-x:hidden;
     scroll-behavior:smooth;
-    cursor: none; 
+    cursor: none;
   }
-  a{ color:var(--orange); text-decoration:none }
+  a{ color:var(--orange); text-decoration:none; cursor:none; }
 
-  /* ✅ Centering utility for the whole site */
-  .container { width:min(100%, var(--page-max)); margin-inline:auto; padding-inline:var(--gutter); }
+  /* ✅ One centering utility used EVERYWHERE */
+  .container{
+    width: min(100%, var(--page-max));
+    margin-left: auto;           /* robust centering */
+    margin-right: auto;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+    display:block;
+    /* outline: 1px solid orange;  // uncomment to debug */
+  }
 
   section { line-height:1.65; padding:80px 0; }
-  
   section h2 { font-family:"Orbitron", system-ui; font-size:clamp(28px,3vw,36px); margin:0 0 14px; text-align:center; color:var(--orange); }
-  
   section p { font-size:18px; margin:0 auto 12px; max-width:900px; text-align:center; }
 
+  .socials {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  flex-wrap: wrap;}
+  
+  .socials a {
+  color: #fff;
+  font-size: 32px;    /* 🔑 larger icons */
+  transition: color .2s ease, transform .2s ease; }
+  
+  .socials a:hover {
+  color: var(--orange);   /* glow into your team orange */
+  transform: scale(1.15); /* slight zoom */ }
+
   @media (max-width: 600px){
-    :root{ --gutter:16px; }       /* tighter padding on phones */
+    :root{ --gutter:16px; }
   }
 `;
 
-
-
+// NAV
 const Nav = styled.nav`
   position:fixed; inset:0 0 auto 0; z-index:10;
-  display:flex; align-items:center; justify-content:space-between;
-  height:56px; /* <<< skinnier bar */
-  padding:0 24px; /* tightened vertical padding */
+  height:56px;
   background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0));
   border-bottom:1px solid rgba(255,255,255,.06);
   backdrop-filter:saturate(140%) blur(6px);
 
-  .brand {
-    position:relative;
-    display:flex; align-items:center;
+  .row{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
   }
 
   .brand img {
-    height:64px; /* stays large */
-    margin-top:8px; /* overlap effect */
+    height:64px;
+    margin-top:8px;
     filter:drop-shadow(0 4px 10px rgba(0,0,0,0.7));
   }
 
@@ -93,35 +114,28 @@ const Nav = styled.nav`
   }
 `;
 
-
+// HERO
 const Hero = styled.header`
   position: relative;
-  /* use dvh to avoid mobile URL bar issues, and fallbacks */
-  min-height: 100dvh;
-  min-height: 100svh;
-  min-height: 100vh;
+  min-height: 100dvh; min-height: 100svh; min-height: 100vh;
   overflow: hidden;
   display: grid;
   place-items: center;
 
-  /* ===== FULL-BLEED VIDEO (ambient) ===== */
   .video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover;              /* <-- ensures it fills the hero */
-    transform: translate3d(0, var(--vy, 0px), 0);   /* parallax */
+    object-fit: cover;
+    transform: translate3d(0, var(--vy, 0px), 0);
     filter: brightness(0.42) contrast(1.05) saturate(1.02) blur(1.6px);
-    z-index: 0;
-    pointer-events: none;           /* never block scrolling/clicks */
+    z-index: 0; pointer-events: none;
   }
   .video-overlay {
     position: absolute; inset: 0;
     background: rgba(0,0,0,0.48);
-    z-index: 1;
-    pointer-events: none;
+    z-index: 1; pointer-events: none;
   }
 
-  /* ===== Top grid overlay (fades on scroll) ===== */
   .grid {
     position: absolute; inset: 0 0 auto 0; height: min(60vh, 700px);
     pointer-events: none; z-index: 3;
@@ -135,32 +149,21 @@ const Hero = styled.header`
             mask-image: linear-gradient(to bottom, black 12%, transparent 100%);
   }
 
-  /* ===== Mech PNG above video ===== */
   .mech {
-  position: absolute; inset: 0;
-  background: url(${mech}) center bottom / contain no-repeat;
-  opacity: .92;
-  transform: translate3d(var(--mx,0px), var(--py,0px), 0) rotate(var(--tilt,0deg));
-  will-change: transform;
-  z-index: 2;
+    position: absolute; inset: 0;
+    background: url(${mech}) center bottom / contain no-repeat;
+    opacity: .92;
+    transform: translate3d(var(--mx,0px), var(--py,0px), 0) rotate(var(--tilt,0deg));
+    will-change: transform;
+    z-index: 2;
+  }
 
-  
-}
-
-
-  /* ===== Foreground content (centered) ===== */
   .content {
     position: relative; z-index: 4;
     padding: clamp(96px, 22vh, 220px) 0 64px;
     display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center;
-
-    width: 100%;
-
-    margin-inline: auto;
-    padding-inline: var(--gutter, 24px);
   }
 
-  /* translucent HUD panel behind logo/tagline */
   .panel {
     display:flex; flex-direction:column; align-items:center; gap:14px;
     background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.35));
@@ -185,27 +188,21 @@ const Hero = styled.header`
   }
 `;
 
-
-
-
-const VideoPanel = styled.div`
-  width:min(820px, 88vw); margin-top:16px;
-  border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 10px 30px rgba(0,0,0,.45); background:rgba(0,0,0,.35);
-  .frame{ width:100%; display:block; aspect-ratio:16/9; background:#000; }
-  .controls{ display:flex; gap:10px; justify-content:center; padding:8px }
-  button{
-    border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06);
-    color:#fff; font-weight:700; padding:8px 12px; border-radius:8px; cursor:pointer;
-  }
-  button:hover{ border-color:var(--orange); box-shadow:0 0 12px rgba(235,99,45,.45),0 0 28px rgba(56,6,54,.35) }
-`;
-
+// SECTIONS
 const Section = styled.section`
-  padding:80px 24px; position:relative;
-  .wrap{max-width:1100px; margin:0 auto}
-  .title{font-family:"Orbitron", system-ui; font-size:34px; text-transform:uppercase; letter-spacing:.06em}
-  .rule{height:2px; width:88px; background:linear-gradient(90deg, var(--orange), transparent); margin:10px 0 28px}
+  position: relative;
+  padding: 80px 0;
+
+  .title{
+    font-family:"Orbitron", system-ui;
+    font-size: clamp(28px, 3vw, 36px);
+    text-transform: uppercase; letter-spacing:.06em; text-align:center;
+  }
+  .rule{
+    height:2px; width:88px;
+    background:linear-gradient(90deg, var(--orange), transparent);
+    margin:10px auto 28px;
+  }
 `;
 
 const Mission = styled(Section)`
@@ -223,15 +220,19 @@ const Mission = styled(Section)`
 const Grid = styled.div`
   display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
   .card{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display:flex; align-items:center; justify-content:center;
     padding:16px 14px; text-align:center; font-weight:800; letter-spacing:.02em;
     border:1px solid rgba(255,255,255,.18); border-radius:12px;
     background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
     transition:.18s transform ease, .18s box-shadow ease, .18s border-color ease;
+    color:inherit; text-decoration:none;
   }
-  .card:hover{transform:translateY(-2px); border-color:var(--orange); box-shadow:0 0 12px rgba(235,99,45,.45),0 0 28px rgba(56,6,54,.35)}
+  .card:hover {
+    transform: translateY(-2px);
+    border-radius:12px;
+    border-color: var(--navy);
+    box-shadow: 0 0 12px rgba(27,52,88,.45), 0 0 28px rgba(56,6,54,.35);
+  }
 `;
 
 const HUD = styled.div`
@@ -252,40 +253,44 @@ const Footer = styled.footer`
 `;
 
 // DATA
-const names = [
-  "Tytan", "Erebus", "Ångel", "LPT", "DriftingLights", "JagWar", "Oath",
-  "Rockagoth", "GlitterPanda", "Juventic", "AzamiKimura", "Japanese\nTeriyakiSauce", "TheCheddarBay"
+const teammates = [
+  { name: "Tytan", url: "https://example.com/tytan" },
+  { name: "Erebus", url: "https://example.com/erebus" },
+  { name: "MajorHurricane", url: "https://example.com/majorhurricane" },
+  { name: "Ångel", url: "https://example.com/angel" },
+  { name: "LPT", url: "https://example.com/lpt" },
+  { name: "DriftingLights", url: "https://example.com/driftinglights" },
+  { name: "JagWar", url: "https://example.com/jagwar" },
+  { name: "Oath", url: "https://example.com/oath" },
+  { name: "Rockagoth", url: "https://rockagoth.com" },
+  { name: "GlitterPanda", url: "https://example.com/glitterpanda" },
+  { name: "Juventic", url: "https://example.com/juventic" },
+  { name: "AzamiKimura", url: "https://example.com/azamikimura" },
+  { name: "Japanese\nTeriyakiSauce", url: "https://example.com/teriyakichamp" },
+  { name: "TheCheddarBay", url: "https://example.com/cheddarbay" }
 ];
 
 export default function App() {
-  // Light parallax on the mech background
+  // Parallax & grid fade
   React.useEffect(() => {
-  const onScroll = () => {
-    const y = window.scrollY;
-    document.documentElement.style.setProperty("--py", `${y * 0.08}px`);  // mech
-    document.documentElement.style.setProperty("--vy", `${y * 0.03}px`);  // video
-    document.documentElement.style.setProperty("--gy", `${y * 0.12}px`);  // grid
+    const onScroll = () => {
+      const y = window.scrollY;
+      document.documentElement.style.setProperty("--py", `${y * 0.08}px`);
+      document.documentElement.style.setProperty("--vy", `${y * 0.03}px`);
+      document.documentElement.style.setProperty("--gy", `${y * 0.12}px`);
+      const mx = Math.sin(y * 0.0025) * 12;
+      const tilt = Math.sin(y * 0.0025) * 2.2;
+      document.documentElement.style.setProperty("--mx", `${mx}px`);
+      document.documentElement.style.setProperty("--tilt", `${tilt}deg`);
+      const t = Math.min(1, Math.max(0, y / 500));
+      const opacity = 0.45 * (1 - t);
+      document.documentElement.style.setProperty("--gridOpacity", opacity.toFixed(3));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    // 🔹 new orbiting mech effect
-    const mx = Math.sin(y * 0.0025) * 12;    // subtle left/right drift
-    const tilt = Math.sin(y * 0.0025) * 2.2; // small rotation
-    document.documentElement.style.setProperty("--mx", `${mx}px`);
-    document.documentElement.style.setProperty("--tilt", `${tilt}deg`);
-
-    // fade grid out by 500px
-    const t = Math.min(1, Math.max(0, y / 500));
-    const opacity = 0.45 * (1 - t);
-    document.documentElement.style.setProperty("--gridOpacity", opacity.toFixed(3));
-  };
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
-
-
-
-
-  // Video controls
   const vidRef = React.useRef(null);
   const [playing, setPlaying] = React.useState(true);
   const togglePlay = () => {
@@ -296,73 +301,70 @@ export default function App() {
 
   return (
     <>
-      <Global />
+      <Global className="container" />
       <CursorFollower />
+
       <Nav>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
-          <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
-          <div>
-            <a className="btn" href="#mission">Mission</a>
-            <a className="btn" href="#team">Team</a>
-            <a className="btn" href="#events">Events</a>
-            <a className="btn" href="#contact">Contact</a>
+        <div className="container">
+          <div className="row">
+            <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
+            <div>
+              <a className="btn" href="#mission">Mission</a>
+              <a className="btn" href="#team">Team</a>
+              <a className="btn" href="#events">Events</a>
+              <a className="btn" href="#contact">Contact</a>
+            </div>
           </div>
         </div>
       </Nav>
 
       <Hero id="top">
-        {/* Background video */}
         <video className="video" autoPlay muted loop playsInline preload="metadata">
           {revealWebm && <source src={revealWebm} type="video/webm" />}
           <source src={revealMp4} type="video/mp4" />
         </video>
         <div className="video-overlay" />
-
-        {/* Mech overlay */}
         <div className="mech" />
-
-        {/* Grid overlay */}
         <div className="grid" />
 
-        {/* Foreground content (panel restores the “framed” look) */}
-        <div className="content">
-          <div className="panel">
-            <img src={logotype} alt="MechaStormTitan" className="logotype" />
-            <div className="tag">Positivity. Passion. Power.</div>
+        {/* Foreground content uses the SAME container as nav/sections */}
+        <div className="container">
+          <div className="content">
+            <div className="panel">
+              <img src={logotype} alt="MechaStormTitan" className="logotype" />
+              <div className="tag">Positivity. Passion. Power.</div>
+            </div>
           </div>
         </div>
       </Hero>
 
-
-
-
       <Mission id="mission">
-        <div className="wrap">
+        <div className="container">
           <h2 className="title">Our Mission</h2>
           <div className="rule" />
-<p>Our mission is to bring positivity, passion, and fun to the fighting game community. We strive to create an environment where players, fans, and partners feel welcomed, supported, and inspired. While rooted primarily in the Pacific Northwest, with a majority of our team in Seattle, we also embrace perspectives from across the country to keep our approach fresh and inclusive.</p>
-
-<p>We aim to uplift the community by highlighting talent, encouraging growth, and fostering a culture of respect and inclusivity. Beyond competition, we bring creativity, collaboration, and innovation to every aspect of our team, from developing new events to sharing knowledge and skill among members. Each team member contributes unique talents, from gameplay mastery to event organization and community engagement, helping us cultivate an environment where everyone can learn, grow, and contribute.</p>
-
-<p>We are also committed to making a positive impact beyond the screen. Through charitable initiatives and support for the local Tekken and esports scene, we hope to strengthen both our regional community and the broader fighting game ecosystem. By combining competition, creativity, and community-driven purpose, we aim not only to showcase the excitement of esports but to build lasting connections, shared joy, and a meaningful presence within the FGC. </p>
+          <p>Our mission is to bring positivity, passion, and fun to the fighting game community. We strive to create an environment where players, fans, and partners feel welcomed, supported, and inspired. While rooted primarily in the Pacific Northwest, with a majority of our team in Seattle, we also embrace perspectives from across the country to keep our approach fresh and inclusive.</p>
+          <p>We aim to uplift the community by highlighting talent, encouraging growth, and fostering a culture of respect and inclusivity. Beyond competition, we bring creativity, collaboration, and innovation to every aspect of our team, from developing new events to sharing knowledge and skill among members. Each team member contributes unique talents, from gameplay mastery to event organization and community engagement, helping us cultivate an environment where everyone can learn, grow, and contribute.</p>
+          <p>We are also committed to making a positive impact beyond the screen. Through charitable initiatives and support for the local Tekken and esports scene, we hope to strengthen both our regional community and the broader fighting game ecosystem. By combining competition, creativity, and community-driven purpose, we aim not only to showcase the excitement of esports but to build lasting connections, shared joy, and a meaningful presence within the FGC. </p>
           <p className="pull">We aim to uplift community by highlighting talent, encouraging growth, and fostering inclusivity.</p>
         </div>
       </Mission>
 
-
-
       <Section id="team">
-        <div className="wrap">
+        <div className="container">
           <h2 className="title">Our Team</h2>
           <div className="rule" />
           <Grid>
-            {names.map(n => <div key={n} className="card">{n}</div>)}
+            {teammates.map(tm => (
+              <a key={tm.name} href={tm.url} target="_blank" rel="noopener noreferrer" className="card">
+                {tm.name}
+              </a>
+            ))}
           </Grid>
         </div>
       </Section>
 
       <Section id="events">
-        <div className="wrap">
+        <div className="container">
           <h2 className="title">Upcoming Events</h2>
           <div className="rule" />
           <HUD>
@@ -382,15 +384,49 @@ export default function App() {
       </Section>
 
       <Section id="contact">
-        <div className="wrap">
+        <div className="container">
           <h2 className="title">Contact</h2>
           <div className="rule" />
-          <p>For partners, events, or press, reach out on socials. Add links here.</p>
+          <p>For partners, events, or press, reach out by email or on socials.</p>
+
+          <div className="socials">
+            {/* Twitter / X */}
+            <a href="https://twitter.com/mechastormtitan" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+              <FaTwitter />
+            </a>
+
+            {/* Twitch */}
+            <a href="https://twitch.tv/mechastormtitan" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+              <FaTwitch />
+            </a>
+
+            {/* YouTube */}
+            <a href="https://www.youtube.com/@MechaStormTitan-g6s" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <FaYoutube />
+            </a>
+
+            {/* TikTok */}
+            <a href="https://www.tiktok.com/@mechastormtitan" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <FaTiktok />
+            </a>
+
+            {/* Linktree (using link icon) */}
+            <a href="https://linktr.ee/MechaStormTitan" target="_blank" rel="noopener noreferrer" aria-label="Linktree">
+              <FaLink />
+            </a>
+
+            {/* Email (opens default mail app) */}
+            <a
+              href="mailto:mechastormtitan@gmail.com?subject=MST20%Inquiry"
+              aria-label="Email"
+            >
+              <FaEnvelope />
+            </a>
+          </div>
         </div>
       </Section>
 
-
-      <Footer>Made with passion in the Pacific Northwest | © MechaStormTitan</Footer>
+      <Footer>Forged in the fire of the Pacific Northwest | © MechaStormTitan</Footer>
     </>
   );
 }
