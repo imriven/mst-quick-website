@@ -332,7 +332,7 @@ export default function App() {
           <div className="content">
             <div className="panel">
               <img src={logotype} alt="MechaStormTitan" className="logotype" />
-              <div className="tag">Positivity. Passion. Power.</div>
+              <div className="tag">Feel The Storm</div>
             </div>
           </div>
         </div>
