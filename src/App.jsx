@@ -370,7 +370,7 @@ export default function App() {
           <HUD>
             <div className="cell">Aug 24, 2025</div>
             <div className="cell">Birthday Tower of Pain</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan/status/1959121831757324628">Details</a></div>
 
             <div className="cell">Aug 28, 2025</div>
             <div className="cell">Almost Pro Tekken Tournament</div>
