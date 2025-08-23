@@ -18,6 +18,14 @@ const Global = createGlobalStyle`
   }
   *{ box-sizing:border-box }
   html,body,#root{ height:100% }
+  html { scroll-behavior: smooth; }
+
+/* make anchors stop *below* the fixed nav */
+[id] { scroll-margin-top: 72px; }   /* tweak to your nav height */
+@media (max-width: 600px){
+  [id] { scroll-margin-top: 64px; }
+}
+
   body{
     margin:0; color:#fff;
     background:
@@ -26,6 +34,7 @@ const Global = createGlobalStyle`
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     overflow-x:hidden;
     scroll-behavior:smooth;
+    cursor: none; 
   }
   a{ color:var(--orange); text-decoration:none }
 
@@ -143,7 +152,6 @@ const Hero = styled.header`
     display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center;
 
     width: 100%;
-    max-width: var(--page-max, 1200px);
     margin-inline: auto;
     padding-inline: var(--gutter, 24px);
   }

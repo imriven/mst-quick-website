@@ -5,7 +5,7 @@ import followerImg from "../assets/orange.png";
 /** Tunables */
 const TRAIL_LENGTH = 8;     // how many ghosts follow
 const TRAIL_DELAY = 1;      // frames skipped between trail samples (higher = more spaced)
-const OFFSET = { x: 30, y: 20 }; // pixel offset from the real cursor
+const OFFSET = { x: 0, y: 0 }; // pixel offset from the real cursor
 const BASE_SIZE = 84;       // px width of the main follower image
 const SCALE_FALLOFF = 0.08; // how much each ghost shrinks
 const OPACITY_FALLOFF = 0.11; // how much each ghost fades
