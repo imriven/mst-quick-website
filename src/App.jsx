@@ -426,7 +426,7 @@ export default function App() {
         </div>
       </Section>
 
-      <Footer>Forged in the fire of the Pacific Northwest | © MechaStormTitan</Footer>
+      <Footer>Born of Lightning, Forged in Fire -- We carry the heart of the PNW | © MechaStormTitan</Footer>
     </>
   );
 }
