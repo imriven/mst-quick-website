@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaGlobe } from "react-icons/fa";
+import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaInstagram, FaGlobe } from "react-icons/fa";
 import { SiLinktree } from "react-icons/si";
 // ASSETS
 import mech from "./assets/mst-mech2.png";
@@ -11,18 +11,18 @@ import revealWebm from "./assets/logo-reveal.webm";
 import CursorFollower from "./components/CursorFollower";
 // Team Pics
 import Angel from "./assets/Angel.png";
-import BandUpMitch from "./assets/Bandupmitch.png";
+import BandUpMitch from "./assets/bandupmitch.png";
 import DriftingLights from "./assets/DriftingLights.png";
 import Erebus from "./assets/Erebus.png";
 import GlitterPanda from "./assets/GlitterPanda.png";
 import Goth from "./assets/goth.jpg";
 import Jagwar from "./assets/Jagwar.png";
 import JTS from "./assets/JTS.png";
-import Juvetic from "./assets/juvetic.png";
+import Juvetic from "./assets/Juvetic.png";
 import LBP from "./assets/LBP.png";
 import MH from "./assets/MH.png";
 import Oath from "./assets/Oath.png";
-import Tytan from "./assets/Tytan.png";
+import Tytan from "./assets/tytan.png";
 import Holder from "./assets/purple.png"; // placeholder for missing photos
 
 
@@ -70,11 +70,10 @@ const Global = createGlobalStyle`
   section p { font-size:18px; margin:0 auto 12px; max-width:900px; text-align:center; }
 
   .socials {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 26px;
-  flex-wrap: wrap;}
+  gap: 14px;                   /* adjust spacing between icons */
+  }
   
   .socials a {
   color: #fff;
@@ -82,7 +81,7 @@ const Global = createGlobalStyle`
   transition: color .2s ease, transform .2s ease; }
   
   .socials a:hover {
-  color: var(--orange);   /* glow into your team orange */
+   color: var(--purple);
   transform: scale(1.15); /* slight zoom */ }
 
   @media (max-width: 600px){
@@ -233,22 +232,67 @@ const Mission = styled(Section)`
 `;
 
 const Grid = styled.div`
-  display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-  .card{
-    display:flex; align-items:center; justify-content:center;
-    padding:16px 14px; text-align:center; font-weight:800; letter-spacing:.02em;
-    border:1px solid rgba(255,255,255,.18); border-radius:12px;
-    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-    transition:.18s transform ease, .18s box-shadow ease, .18s border-color ease;
-    color:inherit; text-decoration:none;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+ .card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  transition: .18s transform ease, .18s box-shadow ease, .18s border-color ease;
+  overflow: hidden;
+  text-align: center;
   }
   .card:hover {
-    transform: translateY(-2px);
-    border-radius:12px;
-    border-color: var(--navy);
-    box-shadow: 0 0 12px rgba(27,52,88,.45), 0 0 28px rgba(56,6,54,.35);
+  transform: translateY(-2px);
+  border-color: var(--navy);
+  box-shadow: 0 0 12px rgba(27,52,88,.45), 0 0 28px rgba(56,6,54,.35);
+  }
+
+  .photo {
+  width: 100%;
+  height: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;
+  }
+  .photo img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: contain; */
+    object-fit: cover;
+  object-position: top center;//eeps heads in frame;
+  display: block;
+  }
+
+  .meta {
+  padding: 12px;
+  }
+  .name { font-weight: 800; letter-spacing: .02em; margin-bottom: 6px; }
+  .sub {
+  font-size: 14px; opacity: .9;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .dot { opacity: .6; }
+
+  .socials {
+  display: flex; gap: 12px; justify-content: center;
+  padding: 10px 0 14px;
+  }
+  .social-icon {
+  font-size: 20px; color: var(--orange);
+  transition: transform .18s ease, color .18s ease;
+  }
+  .social-icon:hover {
+  transform: scale(1.15);
+  color: var(--purple);
   }
 `;
+
+
 
 const HUD = styled.div`
   background:linear-gradient(180deg, rgba(9,12,20,.7), rgba(9,12,20,.7));
@@ -269,36 +313,161 @@ const Footer = styled.footer`
 
 // DATA
 const teammates = [
-  { name: "Ångel", character: "Alisa", state: "Washington", socials: ["https://linktr.ee/ooangeloo"], photo: Angel },
+  // contain group
+  {
+    name: "Ångel",
+    main: "Alisa",
+    state: "Washington",
+    photo: Angel,
+    socials: ["https://linktr.ee/ooangeloo"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "GlitterPanda",
+    main: "Zafina",
+    state: "Illinois",
+    photo: GlitterPanda,
+    socials: ["https://www.twitch.tv/theglitterpanda"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "BandUpMitch",
+    main: "Shaheen",
+    state: "Georgia",
+    photo: BandUpMitch,
+    socials: ["https://linktr.ee/bandupmitch?utm_source=linktree_profile_share&ltsid=0ad94050-428d-43d3-9a8e-85c02d26c49a"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "Oath",
+    main: "Panda",
+    state: "Georgia",
+    photo: Oath,
+    socials: ["https://linktr.ee/oath_aug"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "LBP",
+    main: "Law",
+    state: "New York",
+    photo: LBP,
+    socials: ["https://x.com/LBP_TK"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "DriftingLights",
+    main: "Jin",
+    state: "Oklahoma",
+    photo: DriftingLights,
+    socials: ["https://www.youtube.com/@DriftingLightsOVD"],
+    imageStyle: { objectFit: "contain" }
+  },
 
-  { name: "AzamiKimura", character: "Reina", state: "Massachusetts", socials: ["https://linktr.ee/azamikimura"], photo: Holder },
+  // cover + top center group
+  {
+    name: "Erebus",
+    main: "King",
+    state: "Texas",
+    photo: Erebus,
+    socials: ["https://linktr.ee/msterebus"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "Jagwar",
+    main: "Shaheen",
+    state: "California",
+    photo: Jagwar,
+    socials: ["https://www.youtube.com/@jagwar08"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "JapaneseTeriyakiSauce",
+    main: "Zafina",
+    state: "Washington",
+    photo: JTS,
+    socials: ["https://www.twitch.tv/kingt_3521"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "Tytan",
+    main: "Shaheen",
+    state: "Washington",
+    photo: Tytan,
+    socials: ["https://linktr.ee/Tytanjay"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "MajorHurricane",
+    main: "Kuma",
+    state: "Washington",
+    photo: MH,
+    socials: ["https://linktr.ee/majorhurricane"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "Rockagoth",
+    main: "Lili",
+    state: "Washington",
+    photo: Goth,
+    socials: ["https://linktr.ee/rockagoth", "https://rockagoth.com"], // globe icon will show for your site
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
+  {
+    name: "Juvetic",
+    main: "King",
+    state: "Thailand",
+    photo: Juvetic,
+    socials: ["https://www.instagram.com/juvetic"],
+    imageStyle: { objectFit: "cover", objectPosition: "top center" }
+  },
 
-  { name: "Bandupmitch", character: "Shaheen", state: "Georgia", socials: ["https://linktr.ee/bandupmitch?utm_source=linktree_profile_share&ltsid=0ad94050-428d-43d3-9a8e-85c02d26c49a"], photo: BandUpMitch },
-
-  { name: "DriftingLights", character: "Jin", state: "Oklahoma", socials: ["https://www.youtube.com/@DriftingLightsOVD"], photo: DriftingLights },
-
-  { name: "Erebus", character: "King", state: "Texas", socials: ["https://linktr.ee/msterebus"], photo: Erebus },
-
-  { name: "Glitterpanda", character: "Zafina", state: "Illinois", socials: ["https://www.twitch.tv/theglitterpanda"], photo: GlitterPanda },
-
-  { name: "Jagwar", character: "Shaheen", state: "California", socials: ["https://www.youtube.com/@jagwar08"], photo: Jagwar },
-
-  { name: "JapaneseTeriyakiSauce", character: "Zafina", state: "Washington", socials: ["https://www.twitch.tv/kingt_3521"], photo: JTS },
-
-  { name: "Juvetic", character: "King", state: "Thailand", socials: ["https://www.instagram.com/juvetic"], photo: Juvetic },
-
-  { name: "LBP", character: "Law", state: "New York", socials: ["https://x.com/LBP_TK"], photo: LBP },
-
-  { name: "MajorHurricane", character: "Kuma", state: "Washington", socials: ["https://linktr.ee/majorhurricane"], photo: MH },
-
-  { name: "Oath", character: "Panda", state: "Georgia", socials: ["https://linktr.ee/oath_aug"], photo: Oath },
-
-  { name: "Rockagoth", character: "Lili", state: "Washington", socials: ["https://linktr.ee/rockagoth"], photo: Goth },
-
-  { name: "Thecheddarbay", character: "Steve", state: "Washington", socials: ["https://linktr.ee/balantac1995"], photo: Holder },
-
-  { name: "Tytan", character: "Shaheen", state: "Washington", socials: ["https://linktr.ee/Tytanjay"], photo: Tytan },
+  // using Holder (no photo provided yet)
+  {
+    name: "AzamiKimura",
+    main: "Reina",
+    state: "Massachusetts",
+    photo: Holder,
+    socials: ["https://linktr.ee/azamikimura"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "TheCheddarBay",
+    main: "Steve",
+    state: "Washington",
+    photo: Holder,
+    socials: ["https://linktr.ee/balantac1995"],
+    imageStyle: { objectFit: "contain" }
+  }
 ];
+
+
+const iconFor = (url) => {
+  if (!url) return FaGlobe;
+  const u = url.toLowerCase();
+  if (u.includes("twitter.com") || u.includes("x.com")) return FaTwitter;
+  if (u.includes("youtube.com") || u.includes("youtu.be")) return FaYoutube;
+  if (u.includes("twitch.tv")) return FaTwitch;
+  if (u.includes("tiktok.com")) return FaTiktok;
+  if (u.includes("linktr.ee")) return SiLinktree;
+  if (u.includes("instagram.com")) return FaGlobe;      // swap for FaInstagram if you import it
+  if (u.startsWith("mailto:")) return FaEnvelope;
+  return FaGlobe; // default: globe/website
+};
+
+function getSocialIcon(url) {
+  if (url.includes("twitter.com") || url.includes("x.com")) return <FaTwitter />;
+  if (url.includes("youtube.com")) return <FaYoutube />;
+  if (url.includes("twitch.tv")) return <FaTwitch />;
+  if (url.includes("tiktok.com")) return <FaTiktok />;
+  if (url.includes("linktr.ee")) return <SiLinktree />;
+  if (url.includes("instagram.com")) return <FaInstagram />;
+  if (url.startsWith("mailto:")) return <FaEnvelope />;
+
+  // ✅ If it's your own site (or any general domain), show a globe instead of a link
+  if (url.match(/\.(com|net|org|gg|io|dev|co)/i)) return <FaGlobe />;
+
+  return <FaLink />; // final fallback
+}
 
 
 
@@ -386,11 +555,29 @@ export default function App() {
           <h2 className="title">Our Team</h2>
           <div className="rule" />
           <Grid>
-            {teammates.map(tm => (
-              <a key={tm.name} href={tm.url} target="_blank" rel="noopener noreferrer" className="card">
-                {tm.name}
-              </a>
-            ))}
+            {teammates
+              .slice() // clone so we don’t mutate the original
+              .sort((a, b) => a.name.localeCompare(b.name)) // alphabetize by name
+              .map(tm => (
+                <div key={tm.name} className="card">
+                  <div className="photo">
+                    <img src={tm.photo || Holder} alt={tm.name} style={tm.imageStyle} />
+                  </div>
+                  <div className="meta">
+                    <div className="name">{tm.name}</div>
+                    <div className="sub">
+                      {tm.main} <span className="dot">•</span> {tm.state}
+                    </div>
+                    <div className="socials">
+                      {tm.socials.map((url, i) => (
+                        <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="social-icon">
+                          {getSocialIcon(url)}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
           </Grid>
         </div>
       </Section>
@@ -458,7 +645,7 @@ export default function App() {
         </div>
       </Section>
 
-      <Footer>Born of Lightning, Forged in Fire -- We carry the heart of the PNW | © MechaStormTitan</Footer>
+      <Footer>Born of Lightning, Forged in Fire -- We carry the heart of the PNW | Developed by Rockagoth with Care ♥ | © MechaStormTitan 2025</Footer>
     </>
   );
 }
