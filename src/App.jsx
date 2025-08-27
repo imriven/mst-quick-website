@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaDiscord } from "react-icons/fa";
-
-
-
+import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaGlobe } from "react-icons/fa";
+import { SiLinktree } from "react-icons/si";
 // ASSETS
 import mech from "./assets/mst-mech2.png";
 import logotype from "./assets/logotype.png";
@@ -11,6 +9,23 @@ import outlineNavy from "./assets/blue.png";
 import revealMp4 from "./assets/logo-reveal.mp4";
 import revealWebm from "./assets/logo-reveal.webm";
 import CursorFollower from "./components/CursorFollower";
+// Team Pics
+import Angel from "./assets/Angel.png";
+import BandUpMitch from "./assets/Bandupmitch.png";
+import DriftingLights from "./assets/DriftingLights.png";
+import Erebus from "./assets/Erebus.png";
+import GlitterPanda from "./assets/GlitterPanda.png";
+import Goth from "./assets/goth.jpg";
+import Jagwar from "./assets/Jagwar.png";
+import JTS from "./assets/JTS.png";
+import Juvetic from "./assets/juvetic.png";
+import LBP from "./assets/LBP.png";
+import MH from "./assets/MH.png";
+import Oath from "./assets/Oath.png";
+import Tytan from "./assets/Tytan.png";
+import Holder from "./assets/purple.png"; // placeholder for missing photos
+
+
 
 // GLOBALS
 const Global = createGlobalStyle`
@@ -254,21 +269,38 @@ const Footer = styled.footer`
 
 // DATA
 const teammates = [
-  { name: "Tytan", url: "https://example.com/tytan" },
-  { name: "Erebus", url: "https://example.com/erebus" },
-  { name: "MajorHurricane", url: "https://example.com/majorhurricane" },
-  { name: "Ångel", url: "https://example.com/angel" },
-  { name: "LPT", url: "https://example.com/lpt" },
-  { name: "DriftingLights", url: "https://example.com/driftinglights" },
-  { name: "JagWar", url: "https://example.com/jagwar" },
-  { name: "Oath", url: "https://example.com/oath" },
-  { name: "Rockagoth", url: "https://rockagoth.com" },
-  { name: "GlitterPanda", url: "https://example.com/glitterpanda" },
-  { name: "Juventic", url: "https://example.com/juventic" },
-  { name: "AzamiKimura", url: "https://example.com/azamikimura" },
-  { name: "Japanese\nTeriyakiSauce", url: "https://example.com/teriyakichamp" },
-  { name: "TheCheddarBay", url: "https://example.com/cheddarbay" }
+  { name: "Ångel", character: "Alisa", state: "Washington", socials: ["https://linktr.ee/ooangeloo"], photo: Angel },
+
+  { name: "AzamiKimura", character: "Reina", state: "Massachusetts", socials: ["https://linktr.ee/azamikimura"], photo: Holder },
+
+  { name: "Bandupmitch", character: "Shaheen", state: "Georgia", socials: ["https://linktr.ee/bandupmitch?utm_source=linktree_profile_share&ltsid=0ad94050-428d-43d3-9a8e-85c02d26c49a"], photo: BandUpMitch },
+
+  { name: "DriftingLights", character: "Jin", state: "Oklahoma", socials: ["https://www.youtube.com/@DriftingLightsOVD"], photo: DriftingLights },
+
+  { name: "Erebus", character: "King", state: "Texas", socials: ["https://linktr.ee/msterebus"], photo: Erebus },
+
+  { name: "Glitterpanda", character: "Zafina", state: "Illinois", socials: ["https://www.twitch.tv/theglitterpanda"], photo: GlitterPanda },
+
+  { name: "Jagwar", character: "Shaheen", state: "California", socials: ["https://www.youtube.com/@jagwar08"], photo: Jagwar },
+
+  { name: "JapaneseTeriyakiSauce", character: "Zafina", state: "Washington", socials: ["https://www.twitch.tv/kingt_3521"], photo: JTS },
+
+  { name: "Juvetic", character: "King", state: "Thailand", socials: ["https://www.instagram.com/juvetic"], photo: Juvetic },
+
+  { name: "LBP", character: "Law", state: "New York", socials: ["https://x.com/LBP_TK"], photo: LBP },
+
+  { name: "MajorHurricane", character: "Kuma", state: "Washington", socials: ["https://linktr.ee/majorhurricane"], photo: MH },
+
+  { name: "Oath", character: "Panda", state: "Georgia", socials: ["https://linktr.ee/oath_aug"], photo: Oath },
+
+  { name: "Rockagoth", character: "Lili", state: "Washington", socials: ["https://linktr.ee/rockagoth"], photo: Goth },
+
+  { name: "Thecheddarbay", character: "Steve", state: "Washington", socials: ["https://linktr.ee/balantac1995"], photo: Holder },
+
+  { name: "Tytan", character: "Shaheen", state: "Washington", socials: ["https://linktr.ee/Tytanjay"], photo: Tytan },
 ];
+
+
 
 export default function App() {
   // Parallax & grid fade
