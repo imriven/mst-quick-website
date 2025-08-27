@@ -9,7 +9,7 @@ import outlineNavy from "./assets/blue.png";
 import revealMp4 from "./assets/logo-reveal.mp4";
 import revealWebm from "./assets/logo-reveal.webm";
 import CursorFollower from "./components/CursorFollower";
-import Spotify from "./assets/Spotify.png"
+import SpotifyBadge from "./assets/Spotify.png"
 // Team Pics
 import Angel from "./assets/Angel.png";
 import BandUpMitch from "./assets/bandupmitch.png";
@@ -65,6 +65,33 @@ const Global = createGlobalStyle`
     display:block;
     /* outline: 1px solid orange;  // uncomment to debug */
   }
+
+    /* --- Podcast section helpers --- */
+  .podcast-actions{
+    display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;
+  }
+
+  .live-pill{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:10px 14px; border-radius:999px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    font-weight:700; letter-spacing:.02em;
+  }
+
+  .live-pill .dot{
+    width:10px; height:10px; border-radius:50%;
+    background:#f43; box-shadow:0 0 14px #f43;
+  }
+
+  .spotify-badge{
+    height:44px;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
+    transition: transform .18s ease;
+  }
+  .spotify-badge:hover{ transform: translateY(-1px) scale(1.03); }
+
 
   section { line-height:1.65; padding:80px 0; }
   section h2 { font-family:"Orbitron", system-ui; font-size:clamp(28px,3vw,36px); margin:0 0 14px; text-align:center; color:var(--orange); }
@@ -585,37 +612,56 @@ export default function App() {
       </Section>
 
       <Section id="podcast">
-        <div className="container">
-          <h2 className="title">MechaStorm Radio</h2>
-          <div className="rule" />
-          <p>Unleashing the power of Anime, Gaming, and the FGC! We’re here to talk about anime, gaming and fighting games, bringing you insightful conversations with experts, tips, debates, and our perspective on relevant events happening.</p>
+    <div className="container">
+      <h2 className="title">MechaStorm Radio</h2>
+      <div className="rule" />
+      <p>
+        Unleashing the power of Anime, Gaming, and the FGC! We’re here to talk about anime, gaming and fighting games, bringing you
+        insightful conversations with experts, tips, debates, and our perspective on relevant events happening.
+      </p>
 
-          {/* Spotify Embed */}
-          <div style={{ margin: "32px 0" }}>
-            <iframe
-              src="https://open.spotify.com/embed/show/0Jwc92YAbBfrktnFrOzSTW?utm_source=generator"
-              width="100%"
-              height="232"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy">
-            </iframe>
-          </div>
+      {/* Spotify Embed (auto-updates to latest episode) */}
+      <div style={{ margin: "28px 0" }}>
+        <iframe
+          src="https://open.spotify.com/embed/show/0Jwc92YAbBfrktnFrOzSTW?utm_source=generator"
+          width="100%"
+          height="232"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="MechaStorm Radio on Spotify"
+        />
+      </div>
 
-          {/* Spotify Badge */}
-          <a
-            href="https://open.spotify.com/show/0Jwc92YAbBfrktnFrOzSTW?si=jLR7zzBIQ7O7qTmVpddaBQ"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={Spotify}
-              alt="Listen on Spotify"
-              style={{ height: "44px" }}
-            />
-          </a>
-        </div>
-      </Section>
+      {/* Action row: Spotify badge + Live notice */}
+      <div className="podcast-actions">
+        {/* Local badge image you imported, e.g. import SpotifyBadge from "./assets/spotify-badge.png" */}
+        <a
+          href="https://open.spotify.com/show/0Jwc92YAbBfrktnFrOzSTW?si=jLR7zzBIQ7O7qTmVpddaBQ"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Listen on Spotify"
+        >
+          <img src={SpotifyBadge} alt="Listen on Spotify" className="spotify-badge" />
+        </a>
+
+        {/* Next live show pill */}
+        <a
+          className="live-pill"
+          href="https://twitch.tv/mechastormtitan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="dot" />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
+            Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
+          </span>
+        </a>
+      </div>
+    </div>
+  </Section>
+
 
 
       <Section id="events">
