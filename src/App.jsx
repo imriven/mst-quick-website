@@ -9,6 +9,7 @@ import outlineNavy from "./assets/blue.png";
 import revealMp4 from "./assets/logo-reveal.mp4";
 import revealWebm from "./assets/logo-reveal.webm";
 import CursorFollower from "./components/CursorFollower";
+import Spotify from "./assets/Spotify.png"
 // Team Pics
 import Angel from "./assets/Angel.png";
 import BandUpMitch from "./assets/bandupmitch.png";
@@ -512,6 +513,7 @@ export default function App() {
             <div>
               <a className="btn" href="#mission">Mission</a>
               <a className="btn" href="#team">Team</a>
+              <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
               <a className="btn" href="#events">Events</a>
               <a className="btn" href="#contact">Contact</a>
             </div>
@@ -582,18 +584,53 @@ export default function App() {
         </div>
       </Section>
 
+      <Section id="podcast">
+        <div className="container">
+          <h2 className="title">MechaStorm Radio</h2>
+          <div className="rule" />
+          <p>Unleashing the power of Anime, Gaming, and the FGC! We’re here to talk about anime, gaming and fighting games, bringing you insightful conversations with experts, tips, debates, and our perspective on relevant events happening.</p>
+
+          {/* Spotify Embed */}
+          <div style={{ margin: "32px 0" }}>
+            <iframe
+              src="https://open.spotify.com/embed/show/0Jwc92YAbBfrktnFrOzSTW?utm_source=generator"
+              width="100%"
+              height="232"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+          </div>
+
+          {/* Spotify Badge */}
+          <a
+            href="https://open.spotify.com/show/0Jwc92YAbBfrktnFrOzSTW?si=jLR7zzBIQ7O7qTmVpddaBQ"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={Spotify}
+              alt="Listen on Spotify"
+              style={{ height: "44px" }}
+            />
+          </a>
+        </div>
+      </Section>
+
+
       <Section id="events">
         <div className="container">
           <h2 className="title">Upcoming Events</h2>
           <div className="rule" />
           <HUD>
-            <div className="cell">Aug 24, 2025</div>
-            <div className="cell">Birthday Tower of Pain</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan/status/1959121831757324628">Details</a></div>
 
             <div className="cell">Aug 28, 2025</div>
             <div className="cell">Almost Pro Tekken Tournament</div>
             <div className="cell cta"><a href="https://west.paxsite.com/en-us/features/pax-arena.html">Details</a></div>
+
+            <div className="cell">9/11</div>
+            <div className="cell">Project Aegis</div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan/status/1959121831757324628">Details</a></div>
 
             <div className="cell">—</div>
             <div className="cell">Awaiting Orders…</div>
