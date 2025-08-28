@@ -33,8 +33,11 @@ import Holder from "./assets/purple.png"; // placeholder for missing photos
 const Global = createGlobalStyle`
   :root{
     --orange:#EB632D; --purple:#380636; --navy:#1B3458;
-    --page-max:1320px;                 /* 🔑 site-wide column width */
-    --gutter:24px;
+    --page-max:1320px; --gutter:24px;
+    --bg: 
+      radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.06), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--purple) 40%, #12081a 100%);
+    color-scheme: dark;            /* tell the browser “we are dark” */
   }
   *{ box-sizing:border-box }
   html,body,#root{ height:100%; width:100% }
@@ -47,13 +50,16 @@ const Global = createGlobalStyle`
   }
 
   body{
-    margin:0; color:#fff;
-    background: black;
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    margin:0;
+    color:#e9edf5;                 /* slightly lighter than pure white */
+    background:#000;               /* hard dark fallback */
+    background-image: var(--bg);   /* our gradient/space vibe */
+    background-attachment: fixed;  /* nicer on tall pages; drop if janky on mobile */
     overflow-x:hidden;
-    scroll-behavior:smooth;
+
   }
-  a{ color:var(--orange); text-decoration:none}
+
+  a{ color:var(--orange); text-decoration:none; cursor:none; }
 
   /* ✅ One centering utility used EVERYWHERE */
   .container{
@@ -233,6 +239,9 @@ const Section = styled.section`
   position: relative;
   padding: 80px 0;
 
+  /* clean, subtle dark background for most sections */
+  background: linear-gradient(180deg, #0c0f14, #0a0d12);
+
   .title{
     font-family:"Orbitron", system-ui;
     font-size: clamp(28px, 3vw, 36px);
@@ -245,7 +254,12 @@ const Section = styled.section`
   }
 `;
 
+
 const Mission = styled(Section)`
+    /* stop the metallic animation on Mission specifically */
+  /* animation: none; */
+  animation: shine 30s ease-in-out infinite;
+
   background:
     radial-gradient(800px 400px at right -20%, rgba(235,99,45,.07), transparent 55%),
     linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35)),
@@ -253,70 +267,95 @@ const Mission = styled(Section)`
   background-size: auto 420px, auto, 460px;
   background-repeat: no-repeat, no-repeat, repeat;
   border-block:1px solid rgba(255,255,255,.06);
-  p{color:#e6ebf5; line-height:1.7; font-size:18px}
-  .pull{color:#fff; font-weight:800; font-size:20px; border-left:4px solid var(--orange); padding-left:12px; margin-top:18px}
+  p{color:#e6ebf5; line-height:1.7; font-size:18px;text-align: justify ;}
+  .pull{color:#fff; font-weight:800; font-size:20px; border-left:4px solid var(--orange); padding-left:12px; margin-top:18px;
+  text-align: justify ;}
+  
 `;
+
+const TeamSection = styled(Section)`
+  /* bolder metallic sweep using team palette */
+  background: linear-gradient(
+      135deg,
+      #0c0f14 0%,
+      var(--navy) 22%,
+      #0b0d12 38%,
+      var(--purple) 58%,
+      #10131a 74%,
+      #1a0d1c 86%,
+      #0c0f14 100%
+    );
+  background-size: 320% 320%;
+  animation: teamShine 18s ease-in-out infinite;
+
+  &::before{
+    content:"";
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(600px 200px at 12% 10%, rgba(235,99,45,.18), transparent 60%),
+      radial-gradient(500px 220px at 88% 18%, rgba(235,99,45,.10), transparent 65%);
+    mix-blend-mode: screen;
+    opacity:.8;
+  }
+
+  @keyframes teamShine{
+    0%{   background-position: 0% 50% }
+    50%{  background-position: 100% 50% }
+    100%{ background-position: 0% 50% }
+  }
+`;
+
 
 const Grid = styled.div`
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
 
- .card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  transition: .18s transform ease, .18s box-shadow ease, .18s border-color ease;
-  overflow: hidden;
-  text-align: center;
+  .card{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    padding:20px; text-align:center; font-weight:800; letter-spacing:.02em;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:14px;
+    background: linear-gradient(180deg, rgba(40,40,45,0.9), rgba(25,25,30,0.9));
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6), inset 0 0 12px rgba(235,99,45,.22);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    color:inherit; text-decoration:none;
   }
-  .card:hover {
-  transform: translateY(-2px);
-  border-color: var(--navy);
-  box-shadow: 0 0 12px rgba(27,52,88,.45), 0 0 28px rgba(56,6,54,.35);
+  .card:hover{
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 0 16px rgba(235,99,45,.5), 0 0 34px rgba(56,6,54,.4);
   }
 
-  .photo {
-  width: 100%;
-  height: 160px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #111;
-  }
-  .photo img {
-  width: 100%;
-  height: 100%;
-  /* object-fit: contain; */
-    object-fit: cover;
-  object-position: top center;//eeps heads in frame;
-  display: block;
+  /* 🔥 banner container with dark team gradient behind images */
+  .photo{
+    width:100%;
+    height:130px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,.4);
+    background:
+      radial-gradient(240px 120px at 20% 15%, rgba(235,99,45,.22), transparent 60%),
+      linear-gradient(135deg, rgba(56,6,54,.95), rgba(27,52,88,.95) 60%, rgba(235,99,45,.35));
   }
 
-  .meta {
-  padding: 12px;
+  .photo img{
+    width:100%; height:100%;
+    object-fit: cover;        /* keeps the banner look */
+    object-position: top center;
+    display:block;
   }
-  .name { font-weight: 800; letter-spacing: .02em; margin-bottom: 6px; }
-  .sub {
-  font-size: 14px; opacity: .9;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
-  .dot { opacity: .6; }
 
-  .socials {
-  display: flex; gap: 12px; justify-content: center;
-  padding: 10px 0 14px;
-  }
-  .social-icon {
-  font-size: 20px; color: var(--orange);
-  transition: transform .18s ease, color .18s ease;
-  }
-  .social-icon:hover {
-  transform: scale(1.15);
-  color: var(--purple);
-  }
+  .meta{ text-align:center; }
+  .name{ font-weight:800; margin-bottom:4px; }
+  .sub{ font-size:14px; opacity:.88; display:flex; align-items:center; gap:8px; justify-content:center; }
+  .dot{ opacity:.6 }
+
+  .socials{ display:flex; gap:12px; justify-content:center; margin-top:6px; }
+  .social-icon{ font-size:28px; color:var(--orange); transition: transform .18s ease, color .18s ease; }
+  .social-icon:hover{ transform:scale(1.2); color:var(--purple); }
 `;
+
+
 
 
 
@@ -446,7 +485,7 @@ const teammates = [
     socials: ["https://www.instagram.com/juvetic"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
   },
-    {
+  {
     name: "TheCheddarBay",
     main: "Steve",
     state: "Washington",
@@ -570,14 +609,20 @@ export default function App() {
         <div className="container">
           <h2 className="title">Our Mission</h2>
           <div className="rule" />
-          <p>Our mission is to bring positivity, passion, and fun to the fighting game community. We strive to create an environment where players, fans, and partners feel welcomed, supported, and inspired. While rooted primarily in the Pacific Northwest, with a majority of our team in Seattle, we also embrace perspectives from across the country to keep our approach fresh and inclusive.</p>
-          <p>We aim to uplift the community by highlighting talent, encouraging growth, and fostering a culture of respect and inclusivity. Beyond competition, we bring creativity, collaboration, and innovation to every aspect of our team, from developing new events to sharing knowledge and skill among members. Each team member contributes unique talents, from gameplay mastery to event organization and community engagement, helping us cultivate an environment where everyone can learn, grow, and contribute.</p>
-          <p>We are also committed to making a positive impact beyond the screen. Through charitable initiatives and support for the local Tekken and esports scene, we hope to strengthen both our regional community and the broader fighting game ecosystem. By combining competition, creativity, and community-driven purpose, we aim not only to showcase the excitement of esports but to build lasting connections, shared joy, and a meaningful presence within the FGC. </p>
+          <p>Our mission is to bring positivity, passion, and fun to the fighting game community. We strive to create a welcoming and supportive environment where players, fans, and partners feel inspired to grow and contribute.</p>
+
+          <p>Rooted in the Pacific Northwest yet open to perspectives nationwide, we celebrate diversity, highlight talent, and foster respect and inclusivity. Beyond competition, we emphasize creativity, collaboration, and innovation—whether through hosting events, sharing knowledge, or building connections.</p>
+
+          <p>Together, our team members bring unique strengths that help the community learn, thrive, and evolve. We are also committed to making a positive impact beyond the screen, supporting local esports, uplifting the Tekken scene, and giving back through charitable initiatives.</p>
+
+          <p>By uniting competition, creativity, and community-driven purpose, we aim not only to showcase the excitement of esports but also to build lasting connections, shared joy, and a meaningful presence within the FGC.
+          </p>
+
           <p className="pull">We aim to uplift community by highlighting talent, encouraging growth, and fostering inclusivity.</p>
         </div>
       </Mission>
 
-      <Section id="team">
+      <TeamSection id="team">
         <div className="container">
           <h2 className="title">Our Team</h2>
           <div className="rule" />
@@ -607,58 +652,58 @@ export default function App() {
               ))}
           </Grid>
         </div>
-      </Section>
+      </TeamSection>
 
       <Section id="podcast">
-    <div className="container">
-      <h2 className="title">MechaStorm Radio</h2>
-      <div className="rule" />
-      <p>
-        Unleashing the power of Anime, Gaming, and the FGC! We’re here to talk about anime, gaming and fighting games, bringing you
-        insightful conversations with experts, tips, debates, and our perspective on relevant events happening.
-      </p>
+        <div className="container">
+          <h2 className="title">MechaStorm Radio</h2>
+          <div className="rule" />
+          <p>
+            Unleashing the power of Anime, Gaming, and the FGC! We’re here to talk about anime, gaming and fighting games, bringing you
+            insightful conversations with experts, tips, debates, and our perspective on relevant events happening.
+          </p>
 
-      {/* Spotify Embed (auto-updates to latest episode) */}
-      <div style={{ margin: "28px 0" }}>
-        <iframe
-          src="https://open.spotify.com/embed/show/0Jwc92YAbBfrktnFrOzSTW?utm_source=generator"
-          width="100%"
-          height="232"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title="MechaStorm Radio on Spotify"
-        />
-      </div>
+          {/* Spotify Embed (auto-updates to latest episode) */}
+          <div style={{ margin: "28px 0" }}>
+            <iframe
+              src="https://open.spotify.com/embed/show/0Jwc92YAbBfrktnFrOzSTW?utm_source=generator"
+              width="100%"
+              height="232"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="MechaStorm Radio on Spotify"
+            />
+          </div>
 
-      {/* Action row: Spotify badge + Live notice */}
-      <div className="podcast-actions">
-        {/* Local badge image you imported, e.g. import SpotifyBadge from "./assets/spotify-badge.png" */}
-        <a
-          href="https://open.spotify.com/show/0Jwc92YAbBfrktnFrOzSTW?si=jLR7zzBIQ7O7qTmVpddaBQ"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Listen on Spotify"
-        >
-          <img src={SpotifyBadge} alt="Listen on Spotify" className="spotify-badge" />
-        </a>
+          {/* Action row: Spotify badge + Live notice */}
+          <div className="podcast-actions">
+            {/* Local badge image you imported, e.g. import SpotifyBadge from "./assets/spotify-badge.png" */}
+            <a
+              href="https://open.spotify.com/show/0Jwc92YAbBfrktnFrOzSTW?si=jLR7zzBIQ7O7qTmVpddaBQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Listen on Spotify"
+            >
+              <img src={SpotifyBadge} alt="Listen on Spotify" className="spotify-badge" />
+            </a>
 
-        {/* Next live show pill */}
-        <a
-          className="live-pill"
-          href="https://twitch.tv/mechastormtitan"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="dot" />
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
-            Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
-          </span>
-        </a>
-      </div>
-    </div>
-  </Section>
+            {/* Next live show pill */}
+            <a
+              className="live-pill"
+              href="https://twitch.tv/mechastormtitan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="dot" />
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
+                Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
+              </span>
+            </a>
+          </div>
+        </div>
+      </Section>
 
 
 
