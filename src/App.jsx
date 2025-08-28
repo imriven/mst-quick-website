@@ -453,7 +453,7 @@ const teammates = [
     photo: Cheddar,
     socials: ["https://linktr.ee/balantac1995"],
     imageStyle: { objectFit: "contain" }
-  }
+  },
 
   // using Holder (no photo provided yet)
   {
