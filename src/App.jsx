@@ -24,6 +24,7 @@ import LBP from "./assets/LBP.png";
 import MH from "./assets/MH.png";
 import Oath from "./assets/Oath.png";
 import Tytan from "./assets/tytan.png";
+import Cheddar from "./assets/cheddar.png";
 import Holder from "./assets/purple.png"; // placeholder for missing photos
 
 
@@ -56,11 +57,9 @@ const Global = createGlobalStyle`
 
   /* ✅ One centering utility used EVERYWHERE */
   .container{
-    width: min(100%, var(--page-max));
-    margin-left: auto;           /* robust centering */
-    margin-right: auto;
-    padding-left: var(--gutter);
-    padding-right: var(--gutter);
+    width:min(100%, var(--page-max));
+    margin-inline:auto;
+    padding-inline:var(--gutter);
     display:block;
     /* outline: 1px solid orange;  // uncomment to debug */
   }
@@ -447,6 +446,14 @@ const teammates = [
     socials: ["https://www.instagram.com/juvetic"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
   },
+    {
+    name: "TheCheddarBay",
+    main: "Steve",
+    state: "Washington",
+    photo: Cheddar,
+    socials: ["https://linktr.ee/balantac1995"],
+    imageStyle: { objectFit: "contain" }
+  }
 
   // using Holder (no photo provided yet)
   {
@@ -457,14 +464,6 @@ const teammates = [
     socials: ["https://linktr.ee/azamikimura"],
     imageStyle: { objectFit: "contain" }
   },
-  {
-    name: "TheCheddarBay",
-    main: "Steve",
-    state: "Washington",
-    photo: Holder,
-    socials: ["https://linktr.ee/balantac1995"],
-    imageStyle: { objectFit: "contain" }
-  }
 ];
 
 
