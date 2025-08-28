@@ -75,7 +75,7 @@ const Global = createGlobalStyle`
     display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;
   }
 
-  .live-pill{
+  /* .live-pill{
     display:inline-flex; align-items:center; gap:10px;
     padding:10px 14px; border-radius:999px;
     background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
@@ -87,7 +87,7 @@ const Global = createGlobalStyle`
   .live-pill .dot{
     width:10px; height:10px; border-radius:50%;
     background:#f43; box-shadow:0 0 14px #f43;
-  }
+  } */
 
   .spotify-badge{
     height:44px;
@@ -356,6 +356,123 @@ const Grid = styled.div`
 `;
 
 
+
+const LivePill = styled.span`
+  --pill-bg: linear-gradient(180deg, #ff6b3a3a 0%, #eb632d 60%, #c74e22 100%);
+  --edge: #8a2f14;                 /* darker edge for 3D rim */
+  --text: #111;                    /* dark text for contrast on bright pill */
+  --glow: rgba(235,99,45,.55);
+
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font: 800 12px/1.1 "Orbitron", system-ui;
+  letter-spacing:.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--pill-bg);
+  position: relative;
+  transform: translateZ(0);
+  border: 1px solid var(--edge);
+
+  /* Outer depth */
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.35),
+    0 3px 0 0 var(--edge);
+
+  /* Inner “pressed metal” rim */
+  &::before{
+    content:"";
+    position:absolute; inset:1px;
+    border-radius:inherit;
+    box-shadow: inset 0 6px 10px rgba(0,0,0,.25),
+                inset 0 -2px 0 rgba(255,255,255,.08);
+    pointer-events:none;
+  }
+
+  
+  svg {
+  font-size: 20px;
+  color: #9146FF; /* Twitch purple */
+  filter: drop-shadow(0 0 2px #000) 
+          drop-shadow(0 0 1px #000); /* dark outline effect */
+}
+
+
+  /* Glossy top highlight */
+  /* &::after{
+    content:"";
+    position:absolute; left:10%; right:10%; top:2px; height:40%;
+    border-radius:999px;
+    background: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0));
+    filter: blur(1px);
+    pointer-events:none;
+    mix-blend-mode: screen;
+  } */
+
+  /* Subtle pulsing aura to imply “live” */
+  animation: livePulse 2.2s ease-in-out infinite;
+
+  /* Hover/Active pop */
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  &:hover{
+    transform: translateY(-1px);
+    box-shadow:
+      0 14px 24px rgba(0,0,0,.38),
+      0 4px 0 0 var(--edge),
+      0 0 22px var(--glow);
+    filter: saturate(1.06);
+  }
+  &:active{
+    transform: translateY(1px);
+    box-shadow:
+      0 6px 10px rgba(0,0,0,.35),
+      0 1px 0 0 var(--edge);
+  }
+
+  /* Little red dot */
+  .dot{
+  position:relative;
+  width:12px; height:12px; border-radius:50%;
+  /* richer red with depth */
+  background: radial-gradient(circle at 40% 35%,
+              #ff9a9a 0%, #ff4d4d 40%, #e01919 65%, #8a0f0f 100%);
+  /* inner + outer shadows to “lift” it from the orange */
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.55),         /* inner rim */
+    0 0 8px rgba(255,45,45,.85),             /* red glow */
+    0 2px 6px rgba(0,0,0,.35);               /* dark drop */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.35)); /* extra separation */
+  }
+
+    .dot::after{
+    content:"";
+    position:absolute;
+    top:15%; left:20%;
+    width:50%; height:40%;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(236, 207, 207, 0.65), rgba(255,255,255,0) 80%);
+    filter: blur(1px);
+    opacity:.8;
+    pointer-events:none;
+  }
+
+
+  /* soft dark halo under the LED (no visible border) */
+  .dot::before{
+    content:"";
+    position:absolute; inset:-6px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.38), rgba(0,0,0,0) 70%);
+    filter: blur(2px);
+    pointer-events:none;
+    z-index:-1;
+  }
+
+  @keyframes livePulse{
+    0%,100% { box-shadow: 0 10px 18px rgba(0,0,0,.35), 0 3px 0 0 var(--edge); }
+    50%     { box-shadow: 0 10px 18px rgba(0,0,0,.35), 0 3px 0 0 var(--edge), 0 0 18px var(--glow); }
+  }
+`;
 
 
 
@@ -695,11 +812,17 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="dot" />
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+
+              <LivePill>
+  <span className="dot" />
+  <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
                 <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
                 Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
               </span>
+</LivePill>
+
+              <span className="dot" />
+              
             </a>
           </div>
         </div>
