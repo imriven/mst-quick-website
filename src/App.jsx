@@ -8,7 +8,7 @@ import logotype from "./assets/logotype.png";
 import outlineNavy from "./assets/blue.png";
 import revealMp4 from "./assets/logo-reveal.mp4";
 import revealWebm from "./assets/logo-reveal.webm";
-import CursorFollower from "./components/CursorFollower";
+// import CursorFollower from "./components/CursorFollower";
 import SpotifyBadge from "./assets/Spotify.png"
 // Team Pics
 import Angel from "./assets/Angel.png";
@@ -51,9 +51,8 @@ const Global = createGlobalStyle`
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     overflow-x:hidden;
     scroll-behavior:smooth;
-    cursor: none;
   }
-  a{ color:var(--orange); text-decoration:none; cursor:none; }
+  a{ color:var(--orange); text-decoration:none}
 
   /* ✅ One centering utility used EVERYWHERE */
   .container{
@@ -531,7 +530,7 @@ export default function App() {
   return (
     <>
       <Global className="container" />
-      <CursorFollower />
+      {/* <CursorFollower /> */}
 
       <Nav>
         <div className="container">
@@ -562,7 +561,7 @@ export default function App() {
           <div className="content">
             <div className="panel">
               <img src={logotype} alt="MechaStormTitan" className="logotype" />
-              <div className="tag">Feel The Storm</div>
+              <div className="tag">Unleash The Storm</div>
             </div>
           </div>
         </div>
