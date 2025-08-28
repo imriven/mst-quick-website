@@ -210,20 +210,25 @@ const Hero = styled.header`
     display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center;
   }
 
- .panel {
-  display:flex; flex-direction:column; align-items:center; gap:14px;
-   background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.35));   border: 1px solid rgba(255,255,255,.16);   border-radius: 14px;   padding: 22px 16px;                 /* a hair narrower on small screens */   box-shadow: 0 18px 50px rgba(0,0,0,.45);   backdrop-filter: blur(4px);   width: 100%;
-   max-width: 720px;                    /* cap so it never grows past column */
-   margin-inline: auto;                 /* center inside container */
- }
- .logotype {
-   width: 100%;                         /* fill panel width safely */
-   max-width: 640px;                    /* optional inner cap */   height: auto;
-   filter: drop-shadow(0 8px 18px rgba(0,0,0,.6));
- }
+  .panel {
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.35));
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    backdrop-filter: blur(4px);
+  }
+
+  .logotype { width: min(90vw, 720px); height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,.6)); }
+  .tag {
+    font-family: "Orbitron", system-ui; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    font-size: clamp(18px, 2.4vw, 26px);
+    padding: 10px 16px; border: 2px solid var(--orange); border-radius: 10px; background: rgba(0,0,0,.35);
+  }
 
   @media (max-width: 600px) {
-    .panel { padding: 16px 12px; }
+    .panel { padding: 18px 16px; }
     .tag { font-size: 15px; padding: 8px 12px; }
     .grid { height: 55vh; }
   }
@@ -332,10 +337,7 @@ const Mission = styled(Section)`
       600px auto;
 
     /* single tile is usually enough at this width too */
-    background-repeat:
-      no-repeat,
-      no-repeat,
-      no-repeat;
+
   }
 
 `;
