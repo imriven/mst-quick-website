@@ -247,7 +247,21 @@ const Hero = styled.header`
     margin: 0 auto;            /* ensure it’s centered in flow */
     max-width: 90%;            /* prevent edge clipping */
   }
-}
+
+  @media (min-width: 701px) and (max-width: 1024px){
+  .content{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 160px 32px 80px;
+  }
+
+  .panel{
+    margin: 0 auto;
+    max-width: 75%;            /* let it breathe a bit wider */
+    }
+  }
+  }
 
 `;
 
@@ -288,6 +302,47 @@ const Mission = styled(Section)`
   .pull{color:#fff; font-weight:800; font-size:20px; border-left:4px solid var(--orange); padding-left:12px; margin-top:18px;
   text-align: justify ;}
   
+
+  /* 📱 Phones: center the tile and stop repeating */
+  @media (max-width: 700px){
+    /* keep the glow/overlay centered */
+    background-position:
+      center -60px,   /* radial */
+      center 0,       /* linear overlay */
+      center 20px;    /* outlineNavy tile */
+
+    /* scale the tile a bit larger so it reads on small screens */
+    background-size:
+      900px 420px,    /* radial */
+      auto,           /* linear */
+      520px auto;     /* outlineNavy */
+
+    /* don't tile the outline on phones */
+    background-repeat:
+      no-repeat,
+      no-repeat,
+      no-repeat;
+  }
+
+  /* 📲 Tablets: still centered, allow a subtle repeat if needed */
+  @media (min-width: 701px) and (max-width: 1024px){
+    background-position:
+      center -80px,
+      center 0,
+      center top;
+
+    background-size:
+      1200px 520px,
+      auto,
+      600px auto;
+
+    /* single tile is usually enough at this width too */
+    background-repeat:
+      no-repeat,
+      no-repeat,
+      no-repeat;
+  }
+
 `;
 
 const TeamSection = styled(Section)`
@@ -831,15 +886,15 @@ export default function App() {
             >
 
               <LivePill>
-  <span className="dot" />
-  <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
-                Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
-              </span>
-</LivePill>
+                <span className="dot" />
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  <FaTwitch style={{ fontSize: 18, color: "#9146FF" }} />
+                  Next live: <strong>Aug 28 · 8:00 PM PT</strong> on Twitch
+                </span>
+              </LivePill>
 
               <span className="dot" />
-              
+
             </a>
           </div>
         </div>
