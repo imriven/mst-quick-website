@@ -187,6 +187,7 @@ const Hero = styled.header`
     pointer-events: none; z-index: 3;
     opacity: var(--gridOpacity, 0.45);
     transform: translate3d(0, var(--gy, 0px), 0);
+    z-index: 2;
     background:
       radial-gradient(1200px 500px at 50% 0%, rgba(235,99,45,.22), rgba(56,6,54,0) 70%),
       repeating-linear-gradient(to right, rgba(255,255,255,.12) 0px, rgba(255,255,255,.12) 1px, rgba(255,255,255,0) 1px, rgba(255,255,255,0) 40px),
@@ -201,7 +202,7 @@ const Hero = styled.header`
     opacity: .92;
     transform: translate3d(var(--mx,0px), var(--py,0px), 0) rotate(var(--tilt,0deg));
     will-change: transform;
-    z-index: 2;
+    z-index: 3;
   }
 
   .content {
@@ -227,11 +228,21 @@ const Hero = styled.header`
     padding: 10px 16px; border: 2px solid var(--orange); border-radius: 10px; background: rgba(0,0,0,.35);
   }
 
-  @media (max-width: 600px) {
-    .panel { padding: 18px 16px; }
-    .tag { font-size: 15px; padding: 8px 12px; }
-    .grid { height: 55vh; }
+@media (max-width: 600px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* ✅ horizontal center */
+    justify-content: center; /* ✅ vertical center */
+    text-align: center;
+    padding: 120px 16px 60px;  /* tighten padding for phones */
   }
+
+  .panel {
+    margin: 0 auto;        /* ✅ center horizontally */
+    max-width: 90%;        /* don’t let it stretch off-screen */
+  }
+}
 
   @media (max-width: 700px){
   .content{
@@ -316,12 +327,6 @@ const Mission = styled(Section)`
       900px 420px,    /* radial */
       auto,           /* linear */
       520px auto;     /* outlineNavy */
-
-    /* don't tile the outline on phones */
-    background-repeat:
-      no-repeat,
-      no-repeat,
-      no-repeat;
   }
 
   /* 📲 Tablets: still centered, allow a subtle repeat if needed */
@@ -335,8 +340,6 @@ const Mission = styled(Section)`
       1200px 520px,
       auto,
       600px auto;
-
-    /* single tile is usually enough at this width too */
 
   }
 
