@@ -232,6 +232,23 @@ const Hero = styled.header`
     .tag { font-size: 15px; padding: 8px 12px; }
     .grid { height: 55vh; }
   }
+
+  @media (max-width: 700px){
+  .content{
+    display: flex;
+    justify-content: center;   /* horizontally center */
+    align-items: center;       /* vertically center */
+    text-align: center;
+    width: 100%;
+    padding: 160px 16px 60px;  /* tweak vertical spacing */
+  }
+
+  .panel{
+    margin: 0 auto;            /* ensure it’s centered in flow */
+    max-width: 90%;            /* prevent edge clipping */
+  }
+}
+
 `;
 
 // SECTIONS
