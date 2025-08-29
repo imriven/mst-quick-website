@@ -212,22 +212,45 @@ const Hero = styled.header`
   }
 
   .content {
-    position: relative; z-index: 4;
+    position: relative; 
+    z-index: 4;
     padding: clamp(96px, 22vh, 220px) 0 64px;
-    display: flex; flex-direction: column; gap: 18px; align-items: center; text-align: center;
-  }
+    display: flex; 
+    flex-direction: column;  
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+
+    width:100%;
+    padding: clamp(96px, 22vh, 220px) var(--gutter) 64px;
+    margin-inline:auto;
+    box-sizing:border-box;
+    }
 
   .panel {
-    display:flex; flex-direction:column; align-items:center; gap:14px;
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    gap:14px;
+
     background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.35));
     border: 1px solid rgba(255,255,255,.16);
     border-radius: 14px;
     padding: 22px 24px;
     box-shadow: 0 18px 50px rgba(0,0,0,.45);
     backdrop-filter: blur(4px);
-  }
 
-  .logotype { width: min(90vw, 720px); height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,.6)); }
+    /* 🔑 never exceed the viewport */
+    width: min(720px, calc(100vw - 2 * var(--gutter)));
+    margin-inline:auto;                 /* center horizontally */
+    box-sizing:border-box;
+    }
+
+  .logotype {   width:100%;
+  max-width:680px;
+  height:auto;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.6));
+ }
   .tag {
     font-family: "Orbitron", system-ui; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
     font-size: clamp(18px, 2.4vw, 26px);
@@ -262,7 +285,8 @@ const Hero = styled.header`
 
   .panel{
     margin: 0 auto;            /* ensure it’s centered in flow */
-    max-width: 90%;            /* prevent edge clipping */
+    width: 95%;            /* prevent edge clipping */
+    padding: 18px 16px;
   }
 
   @media (min-width: 701px) and (max-width: 1024px){
