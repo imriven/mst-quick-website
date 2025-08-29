@@ -158,6 +158,12 @@ const Nav = styled.nav`
     border-color:var(--orange);
     box-shadow:0 0 12px rgba(235,99,45,.45),0 0 28px rgba(56,6,54,.35);
   }
+
+  /* 🔻 Hide the link buttons on tablet & smaller */
+  @media (max-width: 1024px){
+    .links{ display:none; }
+    .row{ justify-content:center; }
+  }
 `;
 
 // HERO
@@ -760,19 +766,19 @@ export default function App() {
       {/* <CursorFollower /> */}
 
       <Nav>
-        <div className="container">
-          <div className="row">
-            <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
-            <div>
-              <a className="btn" href="#mission">Mission</a>
-              <a className="btn" href="#team">Team</a>
-              <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
-              <a className="btn" href="#events">Events</a>
-              <a className="btn" href="#contact">Contact</a>
-            </div>
-          </div>
-        </div>
-      </Nav>
+  <div className="container">
+    <div className="row">
+      <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
+      <div className="links">
+        <a className="btn" href="#mission">Mission</a>
+        <a className="btn" href="#team">Team</a>
+        <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
+        <a className="btn" href="#events">Events</a>
+        <a className="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</Nav>
 
       <Hero id="top">
         <video className="video" autoPlay muted loop playsInline preload="metadata">
