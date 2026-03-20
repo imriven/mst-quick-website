@@ -973,15 +973,15 @@ export default function App() {
 
             <div className="cell">April 28th</div>
             <div className="cell">Cluck & Clash Tournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
 
             <div className="cell">June 19th</div>
             <div className="cell">Juneteenth Tournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
 
             <div className="cell">October 24th</div>
             <div className="cell">Cluck & Clash 2ournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
 
             <div className="cell">—</div>
             <div className="cell">Awaiting Orders…</div>
