@@ -704,24 +704,57 @@ const teammates = [
     socials: ["https://www.instagram.com/juvetic"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
   },
-  {
-    name: "TheCheddarBay",
-    main: "Steve",
-    state: "Washington",
-    photo: Cheddar,
-    socials: ["https://linktr.ee/balantac1995"],
-    imageStyle: { objectFit: "contain" }
-  },
-
   // using Holder (no photo provided yet)
   {
     name: "AzamiKimura",
     main: "Reina",
-    state: "Massachusetts",
+    state: "PA",
     photo: Holder,
     socials: ["https://linktr.ee/azamikimura"],
     imageStyle: { objectFit: "contain" }
   },
+    {
+    name: "Eltaborn",
+    main: "",
+    state: "",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "HaradaJr",
+    main: "Azu/Drag",
+    state: "Washington",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "LongArmJones",
+    main: "",
+    state: "",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "YourThatRussian",
+    main: "Dragonov",
+    state: "WA",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  },
+  //template
+  // {
+  //   name: "",
+  //   main: "",
+  //   state: "",
+  //   photo: Holder,
+  //   socials: [""],
+  //   imageStyle: { objectFit: "contain" }
+  // },
+  
 ];
 
 
@@ -938,17 +971,24 @@ export default function App() {
           <div className="rule" />
           <HUD>
 
-            <div className="cell">Aug 28, 2025</div>
-            <div className="cell">Almost Pro Tekken Tournament</div>
-            <div className="cell cta"><a href="https://west.paxsite.com/en-us/features/pax-arena.html">Details</a></div>
+            <div className="cell">April 28th</div>
+            <div className="cell">Cluck & Clash Tournament</div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
 
-            <div className="cell">9/11</div>
-            <div className="cell">Project Aegis</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan/status/1959121831757324628">Details</a></div>
+            <div className="cell">June 19th</div>
+            <div className="cell">Juneteenth Tournament</div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
+
+            <div className="cell">October 24th</div>
+            <div className="cell">Cluck & Clash 2ournament</div>
+            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details</a></div>
 
             <div className="cell">—</div>
             <div className="cell">Awaiting Orders…</div>
             <div className="cell">TBD</div>
+
+
+            
           </HUD>
         </div>
       </Section>
