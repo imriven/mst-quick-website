@@ -259,7 +259,7 @@ const Hero = styled.header`
 
   @media (max-width: 600px){
   
-    min-height: 80dvh; min-height: 80svh; min-height: 80vh;
+    min-height: 80dvh; min-height: 80svh; min-height: 90vh;
   
     .logotype{
     display:none;
