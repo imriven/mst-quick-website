@@ -221,8 +221,12 @@ const Nav = styled.nav`
   .row{
     justify-content: space-between;
   }
+}
 
-  @media (max-width: 700px){
+@media (max-width: 700px){
+  height: auto;
+  padding-bottom: 8px;
+
   .row{
     flex-direction: column;
     gap: 8px;
@@ -240,7 +244,6 @@ const Nav = styled.nav`
     margin: 0;
     font-size: 11px;
     padding: 5px 8px;
-    }
   }
 }
 `;
@@ -253,6 +256,22 @@ const Hero = styled.header`
   overflow: hidden;
   display: grid;
   place-items: center;
+
+  @media (max-width: 600px){
+  
+    min-height: 80dvh; min-height: 80svh; min-height: 80vh;
+  
+    .logotype{
+    display:none;
+  }
+
+  .panel{
+    background:none;
+    border:none;
+    box-shadow:none;
+    padding:0;
+  }
+}
   
 
   .video {
@@ -281,6 +300,8 @@ const Hero = styled.header`
       repeating-linear-gradient(to bottom, rgba(255,255,255,.12) 0px, rgba(255,255,255,.12) 1px, rgba(255,255,255,0) 1px, rgba(255,255,255,0) 40px);
     -webkit-mask-image: linear-gradient(to bottom, black 12%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 12%, transparent 100%);
+
+    
   }
 
 /* Desktop */
@@ -353,52 +374,37 @@ const Hero = styled.header`
     padding: 10px 16px; border: 2px solid var(--orange); border-radius: 10px; background: rgba(0,0,0,.35);
   }
 
-@media (max-width: 600px) {
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   /* ✅ horizontal center */
-    justify-content: center; /* ✅ vertical center */
-    text-align: center;
-    padding: 120px 16px 60px;  /* tighten padding for phones */
+@media (max-width: 600px){
+  .content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 16px 60px;
   }
 
-  .panel {
-    margin: 0 auto;        /* ✅ center horizontally */
-    max-width: 90%;        /* don’t let it stretch off-screen */
+  .panel{
+    margin:0 auto;
+    width:95%;
+    max-width:90%;
+    padding:18px 16px;
   }
 }
 
-  @media (max-width: 700px){
+@media (min-width: 701px) and (max-width: 1024px){
   .content{
-    display: flex;
-    justify-content: center;   /* horizontally center */
-    align-items: center;       /* vertically center */
-    text-align: center;
-    width: 100%;
-    padding: 160px 16px 60px;  /* tweak vertical spacing */
+    display:flex;
+    justify-content:center;
+    text-align:center;
+    padding:160px 32px 80px;
   }
 
   .panel{
-    margin: 0 auto;            /* ensure it’s centered in flow */
-    width: 95%;            /* prevent edge clipping */
-    padding: 18px 16px;
+    margin:0 auto;
+    max-width:75%;
   }
-
-  @media (min-width: 701px) and (max-width: 1024px){
-  .content{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 160px 32px 80px;
-  }
-
-  .panel{
-    margin: 0 auto;
-    max-width: 75%;            /* let it breathe a bit wider */
-    }
-  }
-  }
+}
 
 `;
 
@@ -674,44 +680,306 @@ const LivePill = styled.span`
 
 //EVENTS
 
-const EventFeature = styled.div`
-  margin: 0 auto 32px;
-  max-width: 700px;
+const EventTerminal = styled.div`
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 860px;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(235,99,45,.55);
+  background:
+    radial-gradient(700px 260px at 50% 0%, rgba(235,99,45,.18), transparent 65%),
+linear-gradient(180deg, rgba(12,15,22,.84), rgba(5,7,12,.90));
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.65),
+    0 0 28px rgba(235,99,45,.24),
+    inset 0 0 32px rgba(27,52,88,.36);
 
-  .event-card{
-    display:block;
+  &::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.035) 0px,
+        rgba(255,255,255,.035) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+    opacity:.25;
+    z-index:1;
+  }
+
+  .terminal-top{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:14px;
+    padding:10px 14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  }
+
+  .terminal-label{
+    font-family:"Orbitron", system-ui;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--orange);
+  }
+
+  .terminal-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:"Orbitron", system-ui;
+    font-size:11px;
+    letter-spacing:.1em;
+    color:#d7ffe2;
+    text-transform:uppercase;
+  }
+
+  .status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#2cff72;
+    box-shadow:0 0 12px rgba(44,255,114,.8);
+  }
+
+  .screen-frame{
+    position:relative;
+    max-width: 760px;
+    margin: 0 auto;
+    z-index:2;
     overflow:hidden;
     border-radius:16px;
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(235,99,45,.45);
+    background:#05070c;
     box-shadow:
-      0 18px 50px rgba(0,0,0,.5),
-      0 0 20px rgba(235,99,45,.25);
-    transition:all .2s ease;
+      inset 0 0 24px rgba(235,99,45,.18),
+      0 0 24px rgba(0,0,0,.55);
   }
 
-  .event-card:hover{
-    transform:translateY(-3px);
-    box-shadow:
-      0 22px 60px rgba(0,0,0,.55),
-      0 0 28px rgba(235,99,45,.4);
+  .screen-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(235,99,45,.16), transparent 12%, transparent 88%, rgba(235,99,45,.16)),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.045) 0px,
+        rgba(255,255,255,.045) 1px,
+        transparent 2px,
+        transparent 5px
+      );
+    mix-blend-mode:screen;
+    opacity:.45;
+    z-index:2;
   }
 
-  img{
+  .screen-frame img{
     width:100%;
     display:block;
   }
+
+  .console-title{
+    position:relative;
+    z-index:2;
+    width:max-content;
+    margin:16px auto 10px;
+    padding:6px 16px;
+    border-radius:999px;
+    border:1px solid rgba(235,99,45,.55);
+    background:rgba(235,99,45,.08);
+    color:var(--orange);
+    font-family:"Orbitron", system-ui;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    box-shadow:0 0 14px rgba(235,99,45,.2);
+  }
+
+  .console-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    gap:10px;
+  }
+
+  .event-row{
+    display:grid;
+    grid-template-columns:150px 1fr 180px;
+    gap:10px;
+    align-items:stretch;
+  }
+
+  .event-cell{
+    min-height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    font-weight:800;
+  }
+
+  .date{
+    font-family:"Orbitron", system-ui;
+    color:var(--orange);
+    letter-spacing:.04em;
+  }
+
+  .event-name{
+    color:#eef2ff;
+  }
+
+  .action{
+    border-color:rgba(235,99,45,.65);
+    background:rgba(235,99,45,.08);
+    box-shadow:inset 0 0 12px rgba(235,99,45,.12);
+  }
+
+  .action a{
+    color:#fff;
+    font-family:"Orbitron", system-ui;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+
+  .action:hover{
+    background:rgba(235,99,45,.16);
+    box-shadow:
+      inset 0 0 12px rgba(235,99,45,.16),
+      0 0 14px rgba(235,99,45,.28);
+  }
+
+  .inactive{
+    opacity:.55;
+  }
+
+  @media (max-width:780px){
+    padding:14px;
+    border-radius:16px;
+
+    .terminal-top{
+      flex-direction:column;
+      text-align:center;
+      gap:8px;
+    }
+
+    .terminal-label{
+      font-size:11px;
+    }
+
+    .screen-frame{
+      border-radius:12px;
+    }
+
+    .console-title{
+      font-size:11px;
+      width:100%;
+      text-align:center;
+    }
+
+    .event-row{
+      grid-template-columns:1fr;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.035);
+    }
+
+    .event-cell{
+      min-height:auto;
+      padding:10px 12px;
+    }
+
+    .action a{
+      display:block;
+      width:100%;
+    }
+  }
 `;
 
+const EventsSection = styled(Section)`
+  overflow: hidden;
+  padding: 56px 0;
+  background:
+    radial-gradient(900px 380px at 50% 0%, rgba(235,99,45,.20), transparent 65%),
+    radial-gradient(700px 400px at 10% 80%, rgba(56,6,54,.32), transparent 65%),
+    linear-gradient(180deg, #080b12, #05070c);
 
-const HUD = styled.div`
-  background:linear-gradient(180deg, rgba(9,12,20,.7), rgba(9,12,20,.7));
-  border:2px solid var(--orange); border-radius:16px; padding:18px;
-  box-shadow:0 0 12px rgba(235,99,45,.45),0 0 28px rgba(56,6,54,.35);
-  display:grid; gap:12px; grid-template-columns:150px 1fr 180px;
-  .cell{border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); border-radius:10px; padding:12px 14px; font-weight:700; display:flex; align-items:center; justify-content:center; text-align:center}
-  .cta{border-color:var(--orange)}
-  @media (max-width:780px){ grid-template-columns:1fr; }
+&::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    linear-gradient(rgba(235,99,45,.75) 3px, transparent 3px),
+    linear-gradient(90deg, rgba(235,99,45,.75) 3px, transparent 3px);
+
+  background-size: 48px 48px;
+
+  opacity:.65;
+
+  filter:
+    drop-shadow(0 0 6px rgba(235,99,45,.6))
+    drop-shadow(0 0 14px rgba(235,99,45,.35));
+
+  animation: eventsGridDrift 6s linear infinite;
+
+  transform:
+  perspective(900px)
+  rotateX(72deg)
+  translateY(100px);
+}
+
+  &::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    background:
+      radial-gradient(700px 260px at 50% 30%, transparent, rgba(0,0,0,.35) 70%),
+      linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.42));
+  }
+
+  .container{
+    position:relative;
+    z-index:2;
+  }
+
+  @keyframes eventsGridDrift{
+    from{ background-position: 0 0, 0 0; }
+    to{ background-position: 0 52px, 52px 0; }
+  }
+
+  @media (max-width: 700px){
+    &::before{
+      background-size: 38px 38px;
+      opacity:.35;
+    }
+  }
 `;
+
+//Footer
 
 const Footer = styled.footer`
   padding:36px 24px;
@@ -860,18 +1128,6 @@ const teammates = [
 ];
 
 
-const iconFor = (url) => {
-  if (!url) return FaGlobe;
-  const u = url.toLowerCase();
-  if (u.includes("twitter.com") || u.includes("x.com")) return FaTwitter;
-  if (u.includes("youtube.com") || u.includes("youtu.be")) return FaYoutube;
-  if (u.includes("twitch.tv")) return FaTwitch;
-  if (u.includes("tiktok.com")) return FaTiktok;
-  if (u.includes("linktr.ee")) return SiLinktree;
-  if (u.includes("instagram.com")) return FaGlobe;      // swap for FaInstagram if you import it
-  if (u.startsWith("mailto:")) return FaEnvelope;
-  return FaGlobe; // default: globe/website
-};
 
 function getSocialIcon(url) {
   if (url.includes("twitter.com") || url.includes("x.com")) return <FaTwitter />;
@@ -898,6 +1154,7 @@ export default function App() {
       document.documentElement.style.setProperty("--py", `0px`);
       document.documentElement.style.setProperty("--vy", `${y * 0.03}px`);
       document.documentElement.style.setProperty("--gy", `${y * 0.12}px`);
+      document.documentElement.style.setProperty("--eventsGridY", `${y * 0.08}px`);
       // const mx = Math.sin(y * 0.0025) * 12;
       // const tilt = Math.sin(y * 0.0025) * 2.2;
       // document.documentElement.style.setProperty("--mx", `${mx}px`);
@@ -930,10 +1187,10 @@ export default function App() {
             <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
             <div className="links">
               <a className="btn" href="#store">Store</a>
+              <a className="btn" href="#events">Events</a>
               <a className="btn" href="#mission">Mission</a>
               <a className="btn" href="#team">Team</a>
               <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
-              <a className="btn" href="#events">Events</a>
               <a className="btn" href="#contact">Contact</a>
             </div>
           </div>
@@ -983,20 +1240,87 @@ export default function App() {
         </div>
       </StorePromo>
 
+      <EventsSection id="events">
+        <div className="container">
+          <h2 className="title">Battle Schedule</h2>
+          <div className="rule" />
+
+          <EventTerminal>
+            <div className="terminal-top">
+              <div className="terminal-label">Event Terminal</div>
+              <div className="terminal-status">
+                <span className="status-dot" />
+                Systems Online
+              </div>
+            </div>
+
+            <a
+              className="screen-frame"
+              href="https://www.start.gg/tournament/broken-chains-ii/details"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Broken Chains II tournament details"
+            >
+              <img src={Juneteenth} alt="Broken Chains II Juneteenth Tournament" />
+            </a>
+
+            <div className="console-title">Event Roster</div>
+
+            <div className="console-grid">
+              <div className="event-row">
+                <div className="event-cell date">June 19th</div>
+                <div className="event-cell event-name">Broken Chains II - Juneteenth Tekken 8 Tournament</div>
+                <div className="event-cell action">
+                  <a
+                    href="https://www.start.gg/tournament/broken-chains-ii/details"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Register Now
+                  </a>
+                </div>
+              </div>
+
+              <div className="event-row">
+                <div className="event-cell date">October 24th</div>
+                <div className="event-cell event-name">Cluck & Clash Tournament</div>
+                <div className="event-cell action">
+                  <a
+                    href="https://x.com/mechastormtitan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Details Soon
+                  </a>
+                </div>
+              </div>
+
+              {/* <div className="event-row inactive">
+                <div className="event-cell date">TBA</div>
+                <div className="event-cell event-name">Awaiting Orders…</div>
+                <div className="event-cell">TBD</div>
+              </div> */}
+            </div>
+          </EventTerminal>
+        </div>
+      </EventsSection>
+
       <Mission id="mission">
         <div className="container">
           <h2 className="title">Our Mission</h2>
           <div className="rule" />
-          <p>Our mission is to bring positivity, passion, and fun to the fighting game community. We strive to create a welcoming and supportive environment where players, fans, and partners feel inspired to grow and contribute.</p>
 
-          <p>Rooted in the Pacific Northwest yet open to perspectives nationwide, we celebrate diversity, highlight talent, and foster respect and inclusivity. Beyond competition, we emphasize creativity, collaboration, and innovation—whether through hosting events, sharing knowledge, or building connections.</p>
-
-          <p>Together, our team members bring unique strengths that help the community learn, thrive, and evolve. We are also committed to making a positive impact beyond the screen, supporting local esports, uplifting the Tekken scene, and giving back through charitable initiatives.</p>
-
-          <p>By uniting competition, creativity, and community-driven purpose, we aim not only to showcase the excitement of esports but also to build lasting connections, shared joy, and a meaningful presence within the FGC.
+          <p>
+            MechaStormTitan exists to bring positivity, passion, and fun to the fighting game community. Rooted in the Pacific Northwest and connected nationwide, we create spaces where players, fans, and partners feel welcomed, supported, and inspired to grow.
           </p>
 
-          <p className="pull">We aim to uplift community by highlighting talent, encouraging growth, and fostering inclusivity.</p>
+          <p>
+            Through competition, collaboration, events, and community outreach, we highlight talent, encourage respect, and strengthen the Tekken and esports scenes both on and off screen.
+          </p>
+
+          <p className="pull">
+            We aim to uplift the community by highlighting talent, encouraging growth, and fostering inclusivity.
+          </p>
         </div>
       </Mission>
 
@@ -1089,49 +1413,6 @@ export default function App() {
         </div>
       </Section>
 
-      <Section id="events">
-        <div className="container">
-          <h2 className="title">Upcoming Events</h2>
-          <div className="rule" />
-
-          <EventFeature>
-            <a
-              className="event-card"
-              href="https://www.start.gg/tournament/broken-chains-ii/details"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={Juneteenth} alt="Broken Chains II Juneteenth Tournament" />
-            </a>
-          </EventFeature>
-
-          <HUD>
-            <div className="cell">June 19th</div>
-            <div className="cell">Broken Chains II - Juneteenth Tekken 8 Tournament</div>
-            <div className="cell cta">
-              <a
-                href="https://www.start.gg/tournament/broken-chains-ii/details"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Register Now
-              </a>
-            </div>
-
-            <div className="cell">October 24th</div>
-            <div className="cell">Cluck & Clash Tournament</div>
-            <div className="cell cta">
-              <a href="https://x.com/mechastormtitan" target="_blank" rel="noopener noreferrer">
-                Details Coming Soon
-              </a>
-            </div>
-
-            <div className="cell">—</div>
-            <div className="cell">Awaiting Orders…</div>
-            <div className="cell">TBD</div>
-          </HUD>
-        </div>
-      </Section>
 
       <Section id="contact">
         <div className="container">
