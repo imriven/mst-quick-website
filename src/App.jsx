@@ -283,24 +283,28 @@ const Hero = styled.header`
             mask-image: linear-gradient(to bottom, black 12%, transparent 100%);
   }
 
-.mech {
+/* Desktop */
+.mech{
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: min(60vw, 900px);
-  height: auto;
-  transform: translateX(-50%);
-  opacity: .92;
-  z-index: 3;
-  pointer-events: none;
-  user-select: none;
+  left:50%;
+  bottom:0;
+  width:min(60vw, 500px);
+  transform:translateX(-50%);
+}
 
-  @media (max-width: 700px){
+/* Tablet */
+@media (min-width: 701px) and (max-width: 1024px){
   .mech{
-    width: 115vw;
-    max-width: none;
+    width:65vw;
   }
 }
+
+
+/* Mobile */
+@media (max-width: 700px){
+  .mech{
+    width:85vw;
+  }
 }
 
   .content {
