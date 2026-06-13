@@ -4,6 +4,8 @@ import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaInstagr
 import { SiLinktree } from "react-icons/si";
 // ASSETS
 import mech from "./assets/mst-mech2.png";
+import Juneteenth from "./assets/juneteenth.png";
+import StoreBannerImg from "./assets/store.jpg";
 import logotype from "./assets/logotype.png";
 import outlineNavy from "./assets/blue.png";
 import revealMp4 from "./assets/logo-reveal.mp4";
@@ -121,6 +123,56 @@ const Global = createGlobalStyle`
   }
 `;
 
+//Store
+const StorePromo = styled.section`
+  padding: 48px 0;
+  background: linear-gradient(180deg, #0b0d12, #11131a);
+
+  .store-card{
+    display:block;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:
+      0 18px 50px rgba(0,0,0,.55),
+      0 0 24px rgba(235,99,45,.28);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .store-card:hover{
+    transform: translateY(-3px);
+    box-shadow:
+      0 24px 60px rgba(0,0,0,.65),
+      0 0 32px rgba(235,99,45,.42);
+  }
+
+  .store-card img{
+    width:100%;
+    display:block;
+  }
+
+  .store-button{
+    margin:22px auto 0;
+    width:max-content;
+    display:block;
+    font-family:"Orbitron", system-ui;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:12px 18px;
+    border-radius:10px;
+    border:1px solid var(--orange);
+    color:#fff;
+    background:rgba(235,99,45,.12);
+    box-shadow:0 0 14px rgba(235,99,45,.35);
+  }
+
+  .store-button:hover{
+    background:rgba(235,99,45,.22);
+    box-shadow:0 0 22px rgba(235,99,45,.55);
+  }
+`;
+
 // NAV
 const Nav = styled.nav`
   position:fixed; inset:0 0 auto 0; z-index:10;
@@ -160,19 +212,48 @@ const Nav = styled.nav`
   }
 
   /* 🔻 Hide the link buttons on tablet & smaller */
-  @media (max-width: 1024px){
-    .links{ display:none; }
-    .row{ justify-content:center; }
+@media (max-width: 1024px){
+  .btn{
+    padding: 6px 8px;
+    font-size: 12px;
   }
+
+  .row{
+    justify-content: space-between;
+  }
+
+  @media (max-width: 700px){
+  .row{
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn{
+    margin: 0;
+    font-size: 11px;
+    padding: 5px 8px;
+    }
+  }
+}
 `;
 
 // HERO
 const Hero = styled.header`
   position: relative;
+  isolation: isolate;
   min-height: 100dvh; min-height: 100svh; min-height: 100vh;
   overflow: hidden;
   display: grid;
   place-items: center;
+  
 
   .video {
     position: absolute; inset: 0;
@@ -190,7 +271,7 @@ const Hero = styled.header`
 
   .grid {
     position: absolute; inset: 0 0 auto 0; height: min(60vh, 700px);
-    pointer-events: none; z-index: 3;
+    pointer-events: none;
     opacity: var(--gridOpacity, 0.45);
     transform: translate3d(0, var(--gy, 0px), 0);
     z-index: 2;
@@ -202,14 +283,25 @@ const Hero = styled.header`
             mask-image: linear-gradient(to bottom, black 12%, transparent 100%);
   }
 
-  .mech {
-    position: absolute; inset: 0;
-    background: url(${mech}) center bottom / contain no-repeat;
-    opacity: .92;
-    transform: translate3d(var(--mx,0px), var(--py,0px), 0) rotate(var(--tilt,0deg));
-    will-change: transform;
-    z-index: 3;
+.mech {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(60vw, 900px);
+  height: auto;
+  transform: translateX(-50%);
+  opacity: .92;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+
+  @media (max-width: 700px){
+  .mech{
+    width: 115vw;
+    max-width: none;
   }
+}
+}
 
   .content {
     position: relative; 
@@ -576,6 +668,35 @@ const LivePill = styled.span`
   }
 `;
 
+//EVENTS
+
+const EventFeature = styled.div`
+  margin: 0 auto 32px;
+  max-width: 700px;
+
+  .event-card{
+    display:block;
+    overflow:hidden;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:
+      0 18px 50px rgba(0,0,0,.5),
+      0 0 20px rgba(235,99,45,.25);
+    transition:all .2s ease;
+  }
+
+  .event-card:hover{
+    transform:translateY(-3px);
+    box-shadow:
+      0 22px 60px rgba(0,0,0,.55),
+      0 0 28px rgba(235,99,45,.4);
+  }
+
+  img{
+    width:100%;
+    display:block;
+  }
+`;
 
 
 const HUD = styled.div`
@@ -630,22 +751,6 @@ const teammates = [
     socials: ["https://linktr.ee/oath_aug"],
     imageStyle: { objectFit: "contain" }
   },
-  {
-    name: "LBP",
-    main: "Law",
-    state: "New York",
-    photo: LBP,
-    socials: ["https://x.com/LBP_TK"],
-    imageStyle: { objectFit: "contain" }
-  },
-  {
-    name: "DriftingLights",
-    main: "Jin",
-    state: "Oklahoma",
-    photo: DriftingLights,
-    socials: ["https://www.youtube.com/@DriftingLightsOVD"],
-    imageStyle: { objectFit: "contain" }
-  },
 
   // cover + top center group
   {
@@ -696,14 +801,7 @@ const teammates = [
     socials: ["https://linktr.ee/rockagoth", "https://rockagoth.com"], // globe icon will show for your site
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
   },
-  {
-    name: "Juvetic",
-    main: "King",
-    state: "Thailand",
-    photo: Juvetic,
-    socials: ["https://www.instagram.com/juvetic"],
-    imageStyle: { objectFit: "cover", objectPosition: "top center" }
-  },
+
   // using Holder (no photo provided yet)
   {
     name: "AzamiKimura",
@@ -713,7 +811,7 @@ const teammates = [
     socials: ["https://linktr.ee/azamikimura"],
     imageStyle: { objectFit: "contain" }
   },
-    {
+  {
     name: "Eltaborn",
     main: "",
     state: "",
@@ -754,7 +852,7 @@ const teammates = [
   //   socials: [""],
   //   imageStyle: { objectFit: "contain" }
   // },
-  
+
 ];
 
 
@@ -793,13 +891,13 @@ export default function App() {
   React.useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      document.documentElement.style.setProperty("--py", `${y * 0.08}px`);
+      document.documentElement.style.setProperty("--py", `0px`);
       document.documentElement.style.setProperty("--vy", `${y * 0.03}px`);
       document.documentElement.style.setProperty("--gy", `${y * 0.12}px`);
-      const mx = Math.sin(y * 0.0025) * 12;
-      const tilt = Math.sin(y * 0.0025) * 2.2;
-      document.documentElement.style.setProperty("--mx", `${mx}px`);
-      document.documentElement.style.setProperty("--tilt", `${tilt}deg`);
+      // const mx = Math.sin(y * 0.0025) * 12;
+      // const tilt = Math.sin(y * 0.0025) * 2.2;
+      // document.documentElement.style.setProperty("--mx", `${mx}px`);
+      // document.documentElement.style.setProperty("--tilt", `${tilt}deg`);
       const t = Math.min(1, Math.max(0, y / 500));
       const opacity = 0.45 * (1 - t);
       document.documentElement.style.setProperty("--gridOpacity", opacity.toFixed(3));
@@ -823,19 +921,20 @@ export default function App() {
       {/* <CursorFollower /> */}
 
       <Nav>
-  <div className="container">
-    <div className="row">
-      <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
-      <div className="links">
-        <a className="btn" href="#mission">Mission</a>
-        <a className="btn" href="#team">Team</a>
-        <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
-        <a className="btn" href="#events">Events</a>
-        <a className="btn" href="#contact">Contact</a>
-      </div>
-    </div>
-  </div>
-</Nav>
+        <div className="container">
+          <div className="row">
+            <div className="brand"><img src={logotype} alt="MechaStormTitan" /></div>
+            <div className="links">
+              <a className="btn" href="#store">Store</a>
+              <a className="btn" href="#mission">Mission</a>
+              <a className="btn" href="#team">Team</a>
+              <a className="btn" href="#podcast">Podcast</a>   {/* ✅ NEW */}
+              <a className="btn" href="#events">Events</a>
+              <a className="btn" href="#contact">Contact</a>
+            </div>
+          </div>
+        </div>
+      </Nav>
 
       <Hero id="top">
         <video className="video" autoPlay muted loop playsInline preload="metadata">
@@ -843,7 +942,7 @@ export default function App() {
           <source src={revealMp4} type="video/mp4" />
         </video>
         <div className="video-overlay" />
-        <div className="mech" />
+        <img className="mech" src={mech} alt="" aria-hidden="true" />
         <div className="grid" />
 
         {/* Foreground content uses the SAME container as nav/sections */}
@@ -856,6 +955,29 @@ export default function App() {
           </div>
         </div>
       </Hero>
+
+      <StorePromo id="store">
+        <div className="container">
+          <a
+            className="store-card"
+            href="https://mechastormtitan-tzw-shop.fourthwall.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit the MechaStormTitan store"
+          >
+            <img src={StoreBannerImg} alt="The MechaStormTitan store is open" />
+          </a>
+
+          <a
+            className="store-button"
+            href="https://mechastormtitan-tzw-shop.fourthwall.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get Your Gear
+          </a>
+        </div>
+      </StorePromo>
 
       <Mission id="mission">
         <div className="container">
@@ -963,32 +1085,46 @@ export default function App() {
         </div>
       </Section>
 
-
-
       <Section id="events">
         <div className="container">
           <h2 className="title">Upcoming Events</h2>
           <div className="rule" />
+
+          <EventFeature>
+            <a
+              className="event-card"
+              href="https://www.start.gg/tournament/broken-chains-ii/details"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={Juneteenth} alt="Broken Chains II Juneteenth Tournament" />
+            </a>
+          </EventFeature>
+
           <HUD>
-
-            <div className="cell">April 28th</div>
-            <div className="cell">Cluck & Clash Tournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
-
             <div className="cell">June 19th</div>
-            <div className="cell">Juneteenth Tournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
+            <div className="cell">Broken Chains II - Juneteenth Tekken 8 Tournament</div>
+            <div className="cell cta">
+              <a
+                href="https://www.start.gg/tournament/broken-chains-ii/details"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Register Now
+              </a>
+            </div>
 
             <div className="cell">October 24th</div>
-            <div className="cell">Cluck & Clash 2ournament</div>
-            <div className="cell cta"><a href="https://x.com/mechastormtitan">Details Coming Soon</a></div>
+            <div className="cell">Cluck & Clash Tournament</div>
+            <div className="cell cta">
+              <a href="https://x.com/mechastormtitan" target="_blank" rel="noopener noreferrer">
+                Details Coming Soon
+              </a>
+            </div>
 
             <div className="cell">—</div>
             <div className="cell">Awaiting Orders…</div>
             <div className="cell">TBD</div>
-
-
-            
           </HUD>
         </div>
       </Section>
