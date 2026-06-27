@@ -4,7 +4,6 @@ import { FaTwitter, FaYoutube, FaTiktok, FaLink, FaEnvelope, FaTwitch, FaInstagr
 import { SiLinktree } from "react-icons/si";
 // ASSETS
 import mech from "./assets/mst-mech2.png";
-import Juneteenth from "./assets/juneteenth.png";
 import StoreBannerImg from "./assets/store.jpg";
 import logotype from "./assets/logotype.png";
 import outlineNavy from "./assets/blue.png";
@@ -18,7 +17,7 @@ import BandUpMitch from "./assets/bandupmitch.png";
 import DriftingLights from "./assets/DriftingLights.png";
 import Erebus from "./assets/Erebus.png";
 import GlitterPanda from "./assets/GlitterPanda.png";
-import Goth from "./assets/goth.jpg";
+import Goth from "./assets/goth.png";
 import Jagwar from "./assets/Jagwar.png";
 import JTS from "./assets/JTS.png";
 import Juvetic from "./assets/Juvetic.png";
@@ -27,6 +26,7 @@ import MH from "./assets/MH.png";
 import Oath from "./assets/Oath.png";
 import Tytan from "./assets/tytan.png";
 import Cheddar from "./assets/cheddar.png";
+import YTR from "./assets/YTR.png";
 import Holder from "./assets/purple.png"; // placeholder for missing photos
 
 
@@ -1111,7 +1111,7 @@ const teammates = [
     name: "YourThatRussian",
     main: "Dragonov",
     state: "WA",
-    photo: Holder,
+    photo: YTR,
     socials: [""],
     imageStyle: { objectFit: "contain" }
   },
@@ -1240,70 +1240,7 @@ export default function App() {
         </div>
       </StorePromo>
 
-      <EventsSection id="events">
-        <div className="container">
-          <h2 className="title">Battle Schedule</h2>
-          <div className="rule" />
 
-          <EventTerminal>
-            <div className="terminal-top">
-              <div className="terminal-label">Event Terminal</div>
-              <div className="terminal-status">
-                <span className="status-dot" />
-                Systems Online
-              </div>
-            </div>
-
-            <a
-              className="screen-frame"
-              href="https://www.start.gg/tournament/broken-chains-ii/details"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Broken Chains II tournament details"
-            >
-              <img src={Juneteenth} alt="Broken Chains II Juneteenth Tournament" />
-            </a>
-
-            <div className="console-title">Event Roster</div>
-
-            <div className="console-grid">
-              <div className="event-row">
-                <div className="event-cell date">June 19th</div>
-                <div className="event-cell event-name">Broken Chains II - Juneteenth Tekken 8 Tournament</div>
-                <div className="event-cell action">
-                  <a
-                    href="https://www.start.gg/tournament/broken-chains-ii/details"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Register Now
-                  </a>
-                </div>
-              </div>
-
-              <div className="event-row">
-                <div className="event-cell date">October 24th</div>
-                <div className="event-cell event-name">Cluck & Clash Tournament</div>
-                <div className="event-cell action">
-                  <a
-                    href="https://x.com/mechastormtitan"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Details Soon
-                  </a>
-                </div>
-              </div>
-
-              {/* <div className="event-row inactive">
-                <div className="event-cell date">TBA</div>
-                <div className="event-cell event-name">Awaiting Orders…</div>
-                <div className="event-cell">TBD</div>
-              </div> */}
-            </div>
-          </EventTerminal>
-        </div>
-      </EventsSection>
 
       <Mission id="mission">
         <div className="container">
