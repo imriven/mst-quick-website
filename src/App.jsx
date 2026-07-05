@@ -994,7 +994,7 @@ const teammates = [
   {
     name: "Ångel",
     main: "Alisa",
-    state: "Washington",
+    state: "WA",
     photo: Angel,
     socials: ["https://linktr.ee/ooangeloo"],
     imageStyle: { objectFit: "contain" }
@@ -1002,33 +1002,32 @@ const teammates = [
   {
     name: "GlitterPanda",
     main: "Zafina",
-    state: "Illinois",
+    state: "IL",
     photo: GlitterPanda,
     socials: ["https://www.twitch.tv/theglitterpanda"],
     imageStyle: { objectFit: "contain" }
   },
-  {
-    name: "BandUpMitch",
-    main: "Shaheen",
-    state: "Georgia",
-    photo: BandUpMitch,
-    socials: ["https://linktr.ee/bandupmitch?utm_source=linktree_profile_share&ltsid=0ad94050-428d-43d3-9a8e-85c02d26c49a"],
-    imageStyle: { objectFit: "contain" }
-  },
+  // {
+  //   name: "BandUpMitch",
+  //   main: "Shaheen",
+  //   state: "Georgia",
+  //   photo: BandUpMitch,
+  //   socials: ["https://linktr.ee/bandupmitch?utm_source=linktree_profile_share&ltsid=0ad94050-428d-43d3-9a8e-85c02d26c49a"],
+  //   imageStyle: { objectFit: "contain" }
+  // },
   {
     name: "Oath",
     main: "Panda",
-    state: "Georgia",
+    state: "GA",
     photo: Oath,
     socials: ["https://linktr.ee/oath_aug"],
     imageStyle: { objectFit: "contain" }
   },
-
   // cover + top center group
   {
     name: "Erebus",
     main: "King",
-    state: "Texas",
+    state: "TX",
     photo: Erebus,
     socials: ["https://linktr.ee/msterebus"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
@@ -1036,7 +1035,7 @@ const teammates = [
   {
     name: "Jagwar",
     main: "Shaheen",
-    state: "California",
+    state: "CA",
     photo: Jagwar,
     socials: ["https://www.youtube.com/@jagwar08"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
@@ -1044,7 +1043,7 @@ const teammates = [
   {
     name: "JapaneseTeriyakiSauce",
     main: "Zafina",
-    state: "Washington",
+    state: "WA",
     photo: JTS,
     socials: ["https://www.twitch.tv/kingt_3521"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
@@ -1052,7 +1051,7 @@ const teammates = [
   {
     name: "Tytan",
     main: "Shaheen",
-    state: "Washington",
+    state: "WA",
     photo: Tytan,
     socials: ["https://linktr.ee/Tytanjay"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
@@ -1060,7 +1059,7 @@ const teammates = [
   {
     name: "MajorHurricane",
     main: "Kuma",
-    state: "Washington",
+    state: "MN",
     photo: MH,
     socials: ["https://linktr.ee/majorhurricane"],
     imageStyle: { objectFit: "cover", objectPosition: "top center" }
@@ -1085,8 +1084,8 @@ const teammates = [
   },
   {
     name: "Eltaborn",
-    main: "",
-    state: "",
+    main: "Lars",
+    state: "OH",
     photo: Holder,
     socials: [""],
     imageStyle: { objectFit: "contain" }
@@ -1101,8 +1100,8 @@ const teammates = [
   },
   {
     name: "LongArmJones",
-    main: "",
-    state: "",
+    main: "Law",
+    state: "MI",
     photo: Holder,
     socials: [""],
     imageStyle: { objectFit: "contain" }
@@ -1115,6 +1114,47 @@ const teammates = [
     socials: [""],
     imageStyle: { objectFit: "contain" }
   },
+    {
+    name: "Fumi",
+    main: "Kuma, Panda",
+    state: "FL",
+    photo: Holder,
+    socials: ["https://www.tiktok.com/@fumi._.01"],
+    imageStyle: { objectFit: "contain" }
+  },
+      {
+    name: "ShadowBaka",
+    main: "Brian",
+    state: "NJ",
+    photo: Holder,
+    socials: ["https://linktr.ee/shadowbaka"],
+    imageStyle: { objectFit: "contain" }
+  },
+        {
+    name: "Nijomo",
+    main: "Jin",
+    state: "MI",
+    photo: Holder,
+    socials: ["https://linktr.ee/nijomo"],
+    imageStyle: { objectFit: "contain" }
+  },
+  {
+    name: "CaramelTea",
+    main: "Zafina",
+    state: "CA",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  },
+    {
+    name: "MaseratiJavi",
+    main: "Kuma",
+    state: "MN",
+    photo: Holder,
+    socials: [""],
+    imageStyle: { objectFit: "contain" }
+  }
+  
   //template
   // {
   //   name: "",
