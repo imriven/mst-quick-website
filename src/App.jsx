@@ -27,6 +27,7 @@ import Oath from "./assets/Oath.png";
 import Tytan from "./assets/tytan.png";
 import Cheddar from "./assets/cheddar.png";
 import YTR from "./assets/YTR.png";
+import Longarm from "./assets/longarm.png";
 import Holder from "./assets/purple.png"; // placeholder for missing photos
 
 
@@ -1102,7 +1103,7 @@ const teammates = [
     name: "LongArmJones",
     main: "Law",
     state: "MI",
-    photo: Holder,
+    photo: Longarm,
     socials: [""],
     imageStyle: { objectFit: "contain" }
   },
